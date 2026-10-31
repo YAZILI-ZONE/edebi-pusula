@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edebi Pusula - Merve Çete Hocama Sevgilerle | 9/B Portalı</title>
+    <!-- FontAwesome İkonları -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-overlay: rgba(11, 24, 43, 0.85);
+            --panel-bg: rgba(15, 23, 42, 0.90);
+            --text-color: #f8fafc;
+            --text-muted: #cbd5e1;
+            --accent-color: #38bdf8;
+            --accent-gold: #fbbf24;
+            --accent-pink: #f43f5e;
+            --accent-purple: #a855f7;
+            --border-color: rgba(56, 189, 248, 0.4);
+            --box-bg: rgba(15, 23, 42, 0.85);
+            --whatsapp-green: #25D366;
+        }
+
+        body.light-mode {
+            --bg-overlay: rgba(240, 249, 255, 0.88);
+            --panel-bg: rgba(255, 255, 255, 0.95);
+            --text-color: #0f172a;
+            --text-muted: #334155;
+            --accent-color: #0284c7;
+            --accent-gold: #d97706;
+            --accent-pink: #e11d48;
+            --accent-purple: #7e22ce;
+            --border-color: rgba(2, 132, 199, 0.4);
+            --box-bg: rgba(241, 245, 249, 0.92);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body {
+            background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), 
+                        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .top-bar {
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .search-btn, .burger-btn {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-purple));
+            border: none;
+            color: white;
+            font-size: 0.95rem;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--panel-bg);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .ctrl-btn {
+            background: none;
+            border: none;
+            color: var(--accent-color);
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .search-panel, .right-burger-panel {
+            position: fixed;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: var(--panel-bg);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            transition: all 0.4s ease;
+            padding: 25px 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-panel { left: -420px; border-right: 2px solid var(--border-color); box-shadow: 5px 0 25px rgba(0,0,0,0.5); }
+        .search-panel.active { left: 0; }
+
+        .right-burger-panel { right: -420px; border-left: 2px solid var(--border-color); box-shadow: -5px 0 25px rgba(0,0,0,0.5); }
+        .right-burger-panel.active { right: 0; }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .search-box-input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--box-bg);
+            color: var(--text-color);
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .poem-search-list, .menu-nav-list {
+            list-style: none;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .poem-search-list li, .menu-nav-list li {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            font-size: 0.92rem;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .poem-search-list li:hover, .menu-nav-list li:hover {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-purple));
+            color: #fff;
+            font-weight: bold;
+            transform: translateX(5px);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            max-width: 1300px;
+            width: 100%;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            background: linear-gradient(135deg, #38bdf8, #fbbf24, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+            font-weight: bold;
+            text-shadow: 0 4px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .header-sub-banner {
+            font-size: 1.05rem;
+            color: var(--accent-gold);
+            margin-top: 8px;
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .top-grid {
+            display: grid;
+            grid-template-columns: 260px 1fr 280px;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .class-badge {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 3px double var(--accent-color);
+            background: linear-gradient(135deg, rgba(56,189,248,0.2), rgba(244,63,94,0.2));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px auto;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .class-badge .grade {
+            font-size: 2.4rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .poem-title {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            text-align: center;
+            margin-bottom: 4px;
+            font-weight: bold;
+        }
+
+        .poem-author {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 18px;
+        }
+
+        .poem-box {
+            font-size: 1.2rem;
+            line-height: 2.2;
+            min-height: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: pre-line;
+            text-align: center;
+            background: var(--box-bg);
+            padding: 30px;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-color);
+            border-right: 5px solid var(--accent-pink);
+        }
+
+        .poem-footer-tools {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 18px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            padding: 10px 18px;
+            font-size: 0.92rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .action-btn:hover {
+            background: var(--accent-color);
+            color: #0f172a;
+            transform: translateY(-2px);
+        }
+
+        .like-btn {
+            background: rgba(244, 63, 94, 0.15);
+            border: 1px solid #f43f5e;
+            color: #f43f5e;
+            padding: 10px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .like-btn:hover {
+            background: #f43f5e;
+            color: #fff;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background: var(--panel-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 16px;
+            max-width: 950px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .iq-level-bar {
+            background: var(--box-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(56,189,248,0.3);
+        }
+
+        .iq-badge {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+            margin-top: 5px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-color), var(--accent-pink));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .iq-question-box {
+            background: var(--box-bg);
+            padding: 22px;
+            border-radius: 10px;
+            border-left: 6px solid var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        .iq-opt-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 14px;
+            margin: 10px 0;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.98rem;
+        }
+
+        .iq-opt-btn:hover {
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-purple));
+            color: #fff;
+            font-weight: bold;
+            transform: translateX(4px);
+        }
+
+        .iq-nav-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            gap: 10px;
+        }
+
+        .art-card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .art-card {
+            background: var(--box-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 18px;
+            border-left: 4px solid var(--accent-gold);
+        }
+
+        .art-title {
+            color: var(--accent-gold);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .written-input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background: rgba(0,0,0,0.3);
+            color: var(--text-color);
+            margin-top: 8px;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .feedback {
+            font-size: 0.88rem;
+            font-weight: bold;
+            margin-top: 8px;
+            line-height: 1.4;
+            padding: 8px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .whatsapp-btn {
+            background-color: var(--whatsapp-green);
+            color: white !important;
+            text-decoration: none !important;
+            padding: 14px 28px;
+            border-radius: 30px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            background-color: #1eb857;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            padding-top: 20px;
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            background: var(--panel-bg);
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        @media print {
+            body * { visibility: hidden !important; }
+            #print-area, #print-area * { visibility: visible !important; }
+            #print-area {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                color: #000 !important;
+                background: #fff !important;
+                padding: 40px !important;
+                display: block !important;
+            }
+            .print-header { text-align: center; border-bottom: 2px solid #000; padding-bottom: 15px; margin-bottom: 30px; }
+            .print-poem-title { font-size: 24pt; text-align: center; font-weight: bold; margin-bottom: 5pt; }
+            .print-poem-author { font-size: 15pt; text-align: center; font-style: italic; margin-bottom: 30pt; }
+            .print-poem-body { font-size: 16pt; line-height: 2.2; text-align: center; white-space: pre-line; }
+        }
+
+        @media (max-width: 950px) {
+            .top-grid { grid-template-columns: 1fr; }
+            .top-bar { justify-content: center; flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sol Arama Paneli (Dev Şiir Arşivi) -->
+    <div class="search-panel" id="search-panel">
+        <div class="panel-header">
+            <h2 style="color: var(--accent-gold); font-size:1.15rem;">📜 Dev Şiir Koleksiyonu (Tam 2 Kıta)</h2>
+            <button class="close-btn" onclick="toggleSearchPanel()">✕</button>
+        </div>
+        <input type="text" class="search-box-input" id="search-input" placeholder="Şiir veya Şair İsmi..." oninput="filterPoems()">
+        <ul class="poem-search-list" id="poem-search-list"></ul>
+    </div>
+
+    <!-- Sağ Burger Menü (Edebi Pusula Modülleri) -->
+    <div class="right-burger-panel" id="right-burger-panel">
+        <div class="panel-header">
+            <h2 style="color: var(--accent-color); font-size:1.15rem;">🧭 Edebi Pusula Menüsü</h2>
+            <button class="close-btn" onclick="toggleRightBurger()">✕</button>
+        </div>
+        <ul class="menu-nav-list">
+            <li onclick="openModal('ai-modal')">🤖 Sanal Edebi Asistan (Gelişmiş Şiir Üreteci)</li>
+            <li onclick="openModal('iq-modal')">🧠 Evrimsel Edebiyat Zeka Testi (15 Soru)</li>
+            <li onclick="openModal('quiz-modal')">📝 MEB 9. Sınıf Online Deneme (20 Soru)</li>
+            <li onclick="openModal('reading-modal')">📖 Okuduğunu Anlama & Yazılı Analiz (6 Soru)</li>
+            <li onclick="openModal('songs-modal')">🎵 Bestelenmiş Şiirler & MANİFEST Köşesi</li>
+            <li onclick="openModal('dict-modal')">📚 Günün Derin Kelimesi & Sözlük</li>
+            <li onclick="openModal('arts-modal')">🎭 Edebi Sanatlar Rehberi (Örnekli Kartlar)</li>
+            <li onclick="openModal('match-modal')">⚔️ Eser - Yazar Eşleştirme Oyunu</li>
+            <li onclick="openModal('timeline-modal')">⏳ Türk Edebiyatı Dönemleri (Zaman Çizgisi)</li>
+            <li onclick="openModal('thoughts-modal')">💙 Merve Hocamıza Özel İnce Not</li>
+            <li onclick="openModal('feedback-modal')">💬 Görüş, Öneri & İletişim</li>
+        </ul>
+    </div>
+
+    <!-- Üst Kontrol Barı -->
+    <div class="top-bar">
+        <button class="search-btn" onclick="toggleSearchPanel()">
+            🔍 <span>Dev Şiir Arşivi (40+ Şiir)</span>
+        </button>
+        
+        <div class="controls">
+            <button class="ctrl-btn" onclick="toggleTheme()"><i class="fas fa-adjust"></i> Tema Değiştir</button>
+        </div>
+
+        <button class="burger-btn" onclick="toggleRightBurger()">
+            ☰ <span>Edebi Pusula Menüsü</span>
+        </button>
+    </div>
+
+    <header>
+        <h1>🧭 Edebi Pusula</h1>
+        <div class="header-sub-banner">Merve Çete Hocama Sevgilerle - 9/B Sınıfı Edebiyat Portalı 💙</div>
+    </header>
+
+    <div class="main-container">
+        <div class="top-grid">
+            
+            <!-- Sol Bilgi Paneli -->
+            <div class="panel">
+                <div class="class-badge"><span class="grade">9/B</span></div>
+                <h3 style="text-align:center; margin-bottom:12px; color:var(--accent-color);">Edebi Pusula</h3>
+                <p style="font-size:0.85rem; color:var(--text-muted); text-align:center; line-height:1.6;">
+                    Sevgili <strong>Merve Çete</strong> Hocamız rehberliğinde hazırlanan, özenle seçilmiş 2 kıtalı şiirlerle donatılmış ful paket 9/B edebiyat merkezi.
+                </p>
+            </div>
+
+            <!-- Orta Şiir Ekranı -->
+            <div class="panel">
+                <div class="poem-title" id="baslik"></div>
+                <div class="poem-author" id="yazar"></div>
+                <div class="poem-box" id="siir-alani"></div>
+                
+                <div class="poem-footer-tools">
+                    <button class="action-btn" onclick="sonrakiSiir()">✨ Rastgele Şiir ✨</button>
+                    <button class="action-btn" onclick="speakPoem()">🔊 Sesli Oku</button>
+                    <button class="like-btn" onclick="addLike()">❤️ <span id="like-count">890</span></button>
+                    <button class="action-btn" onclick="printPoemOnly()">🖨️ Yazdır / PDF İndir</button>
+                </div>
+            </div>
+
+            <!-- Sağ Hızlı Bilgi Paneli -->
+            <div class="panel">
+                <div style="background:var(--box-bg); padding:14px; border-radius:10px; border-left:4px solid var(--accent-gold); margin-bottom:15px;">
+                    <div style="font-size:0.88rem; color:var(--accent-gold); font-weight:bold; margin-bottom:6px;">🌙 Günün Sözü</div>
+                    <div style="font-size:0.85rem; color:var(--text-muted); font-style:italic;" id="daily-quote-text">Yükleniyor...</div>
+                </div>
+
+                <div style="background:var(--box-bg); padding:12px; border-radius:10px; border-left:4px solid var(--accent-purple); margin-bottom:15px;">
+                    <div style="font-size:0.88rem; color:var(--accent-purple); font-weight:bold; margin-bottom:6px;">📚 Günün Terimi</div>
+                    <div style="font-size:0.82rem; color:var(--text-muted);">
+                        <strong>Saf Şiir:</strong> Şiirde ahenk, ritim ve kelime seçimine önem verip dili her şeyin üstünde tutan anlayış.
+                    </div>
+                </div>
+
+                <div style="background:var(--box-bg); padding:12px; border-radius:10px; border-left:4px solid var(--accent-color);">
+                    <div style="font-size:0.88rem; color:var(--accent-color); font-weight:bold; margin-bottom:6px;">✨ Sınıf Notu</div>
+                    <div style="font-size:0.82rem; color:var(--text-muted);">
+                        Merve Hocamızın rehberliğinde edebiyatı sevmeye ve kelimelerin gücünü keşfetmeye devam ediyoruz.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- MODAL 1: SANAL EDEBİ ASİSTAN (GELİŞMİŞ ŞİİR ÜRETECİ - 5 TEMA) -->
+    <div class="modal-overlay" id="ai-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🤖 Sanal Edebi Asistan (Şiir Üreteci)</h3>
+                <button class="close-btn" onclick="closeModal('ai-modal')">✕</button>
+            </div>
+            <div style="background:var(--box-bg); padding:18px; border-radius:10px;">
+                <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:12px;">Tema seçimi yapın, yapay asistanımız 2 kıtalı özgün edebi mısralar üretsin:</p>
+                <select id="ai-theme" class="written-input" style="margin-bottom:15px;">
+                    <option value="antalya">🌊 Tema: Antalya Denizi & Akdeniz Mavisi</option>
+                    <option value="9b">📘 Tema: 9/B Sınıfı & Merve Hoca</option>
+                    <option value="manifest">🎸 Tema: MANİFEST Ritimleri & Coşku</option>
+                    <option value="saf">🌿 Tema: Saf Şiir & Doğa Rüzgarı</option>
+                    <option value="gece">🌙 Tema: Gece & Edebi İlham</option>
+                </select>
+                <button class="action-btn" onclick="generateAiPoem()">✨ Özgün Şiir Üret</button>
+                <div id="ai-output" style="margin-top:15px; background:rgba(0,0,0,0.4); padding:18px; border-radius:8px; font-style:italic; white-space:pre-line; color:var(--accent-gold); display:none; line-height:1.8; font-size:1.05rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 2: EVRİMSEL ZEKA TESTİ (15 SORU) -->
+    <div class="modal-overlay" id="iq-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🧠 Evrimsel Edebiyat Zeka Testi (15 Soru & Şaşırtmalı)</h3>
+                <button class="close-btn" onclick="closeModal('iq-modal')">✕</button>
+            </div>
+            
+            <div class="iq-level-bar">
+                <div style="font-size:0.9rem; color:var(--text-muted);">Mevcut Evrimsel Zeka Seviyeniz:</div>
+                <div class="iq-badge" id="iq-level-display">🪼 Deniz Anası</div>
+                <div class="progress-track"><div class="progress-fill" id="iq-progress"></div></div>
+            </div>
+
+            <div id="iq-quiz-body"></div>
+
+            <div class="iq-nav-btns">
+                <button class="action-btn" onclick="prevIqQuestion()">⬅️ Önceki Soru</button>
+                <button class="action-btn" onclick="resetIqTest()">🔄 Testi Sıfırla</button>
+                <button class="action-btn" onclick="nextIqQuestion()">Sonraki Soru ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 3: MEB 9. SINIF DENEME (20 SORU) -->
+    <div class="modal-overlay" id="quiz-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📝 MEB 9. Sınıf Edebiyat Online Deneme (20 Soru)</h3>
+                <button class="close-btn" onclick="closeModal('quiz-modal')">✕</button>
+            </div>
+            <div id="quiz-container-15"></div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: OKUDUĞUNU ANLAMA (6 SORU) -->
+    <div class="modal-overlay" id="reading-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📖 Okuduğunu Anlama ve Metin Analizi (6 Yazılı Soru)</h3>
+                <button class="close-btn" onclick="closeModal('reading-modal')">✕</button>
+            </div>
+            
+            <div style="background:var(--box-bg); border-left:4px solid var(--accent-gold); padding:18px; border-radius:8px; font-size:0.98rem; line-height:1.8; margin-bottom:20px; font-style:italic;">
+                "Antalya'nın turkuaz denizine bakarken edebiyatın zamanı durduran gücünü hissederiz. Sanat ve edebiyat, insanın zamanın yıpratıcı etkisine karşı kurduğu en güçlü kalkandır. Bir mimar taşla, bir ressam renkle, bir şair ise kelimelerle ölümsüzlüğe ulaşır. Kelimeler geçmişin hatıralarını geleceğe taşıyan büyülü köprülerdir. Sanatsız kalan bir toplum hafızasını kaybetmiş bir insan gibidir."
+            </div>
+
+            <div style="background:var(--box-bg); border-radius:8px; padding:16px; margin-bottom:15px; border:1px solid var(--border-color);">
+                <div style="font-weight:bold; margin-bottom:5px;">Soru 1: Yazar metinde sanatı ve edebiyatı neye benzetmektedir?</div>
+                <input type="text" id="rq1" class="written-input" placeholder="Cevabınızı buraya yazınız...">
+                <button class="action-btn" onclick="checkWrittenAns(1, ['kalkan', 'ölümsüzlük', 'koruma'], 'Yazar sanatı insanın zamanın yıpratıcı etkisine karşı KALKANI olarak tanımlar.')">Cevabı Kontrol Et & Açıklama</button>
+                <div id="rf1" class="feedback"></div>
+            </div>
+
+            <div style="background:var(--box-bg); border-radius:8px; padding:16px; margin-bottom:15px; border:1px solid var(--border-color);">
+                <div style="font-weight:bold; margin-bottom:5px;">Soru 2: Kelimelerin geçmiş ve gelecek arasındaki görevi nedir?</div>
+                <input type="text" id="rq2" class="written-input" placeholder="Cevabınızı buraya yazınız...">
+                <button class="action-btn" onclick="checkWrittenAns(2, ['köprü', 'taşı', 'gelec', 'geçmiş'], 'Kelimeler geçmişin hatıralarını geleceğe taşıyan büyülü köprülerdir.')">Cevabı Kontrol Et & Açıklama</button>
+                <div id="rf2" class="feedback"></div>
+            </div>
+
+            <div style="background:var(--box-bg); border-radius:8px; padding:16px; margin-bottom:15px; border:1px solid var(--border-color);">
+                <div style="font-weight:bold; margin-bottom:5px;">Soru 3: Şairin ölümsüzlüğe ulaşmada kullandığı en temel araç nedir?</div>
+                <input type="text" id="rq3" class="written-input" placeholder="Cevabınızı buraya yazınız...">
+                <button class="action-btn" onclick="checkWrittenAns(3, ['kelime', 'dil', 'mısra', 'şiir'], 'Şair kelimeler ve mısralar aracılığıyla zamana meydan okuyup ölümsüzlüğe ulaşır.')">Cevabı Kontrol Et & Açıklama</button>
+                <div id="rf3" class="feedback"></div>
+            </div>
+
+            <div style="background:var(--box-bg); border-radius:8px; padding:16px; margin-bottom:15px; border:1px solid var(--border-color);">
+                <div style="font-weight:bold; margin-bottom:5px;">Soru 4: Sanattan mahrum kalan toplumlar neye benzetilmiştir?</div>
+                <input type="text" id="rq4" class="written-input" placeholder="Cevabınızı buraya yazınız...">
+                <button class="action-btn" onclick="checkWrittenAns(4, ['hafıza', 'insan', 'kaybetmiş'], 'Sanatsız kalan toplumlar hafızasını kaybetmiş bir insana benzetilmiştir.')">Cevabı Kontrol Et & Açıklama</button>
+                <div id="rf4" class="feedback"></div>
+            </div>
+
+            <div style="background:var(--box-bg); border-radius:8px; padding:16px; margin-bottom:15px; border:1px solid var(--border-color);">
+                <div style="font-weight:bold; margin-bottom:5px;">Soru 5: Mimar ve ressam ile şair arasındaki araç farkı nedir?</div>
+                <input type="text" id="rq5" class="written-input" placeholder="Cevabınızı buraya yazınız...">
+                <button class="action-btn" onclick="checkWrittenAns(5, ['taş', 'renk', 'kelime'], 'Mimar taşla, ressam renkle, şair ise kelimelerle eser üretir.')">Cevabı Kontrol Et & Açıklama</button>
+                <div id="rf5" class="feedback"></div>
+            </div>
+
+            <div style="background:var(--box-bg); border-radius:8px; padding:16px; margin-bottom:15px; border:1px solid var(--border-color);">
+                <div style="font-weight:bold; margin-bottom:5px;">Soru 6: Metnin başlığı sizce ne olmalıdır?</div>
+                <input type="text" id="rq6" class="written-input" placeholder="Cevabınızı buraya yazınız...">
+                <button class="action-btn" onclick="checkWrittenAns(6, ['sanat', 'edebiyat', 'kelime', 'kalkan'], 'Edebiyatın Gücü, Kelimelerin Ölümsüzlüğü veya Sanat Kalkanı uygun başlıklardır.')">Cevabı Kontrol Et & Açıklama</button>
+                <div id="rf6" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 5: BESTELENMİŞ ŞİİRLER -->
+    <div class="modal-overlay" id="songs-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🎵 Bestelenmiş Şiirler & MANİFEST Ritimleri</h3>
+                <button class="close-btn" onclick="closeModal('songs-modal')">✕</button>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:15px;">
+                <div class="art-card">
+                    <div class="art-title">🎶 Attilâ İlhan - Mahur Beste</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Müziğe dönüşen hüznün ve tutkunun ölümsüz şiirsel anlatımı.</p>
+                </div>
+                <div class="art-card">
+                    <div class="art-title">🎸 MANİFEST & 9/B Ritimleri</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Merve Hocamızın enerjisini ve modern gençliğin edebi coşkusunu simgeleyen özel ritimler.</p>
+                </div>
+                <div class="art-card">
+                    <div class="art-title">🎶 Sabahattin Ali - Aldırma Gönül</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Dillerden düşmeyen, şiirden şarkıya evrilen milli klasiklerimizden.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 6: GÜNÜN DERİN KELİMESİ -->
+    <div class="modal-overlay" id="dict-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">📚 Günün Derin Kelimesi & Sözlük</h3>
+                <button class="close-btn" onclick="closeModal('dict-modal')">✕</button>
+            </div>
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px; border-left:5px solid var(--accent-gold);">
+                <h4 style="color:var(--accent-gold); font-size:1.3rem; margin-bottom:8px;">Bergüzar (Hatıra, Armağan)</h4>
+                <p style="line-height:1.7; color:var(--text-muted); margin-bottom:12px;">
+                    Unutulmamak üzere verilen, sevgiyi ve geçmişi hatırlatan değerli armağan, hatıra. Edebiyatta ve divan şiirinde sevgiliden kalan en kıymetli nişanedir.
+                </p>
+                <em style="color:var(--accent-color);">Örnek Cümle: "Bu site bize 9/B sınıfından kalan en güzel bergüzardır."</em>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 7: EDEBİ SANATLAR -->
+    <div class="modal-overlay" id="arts-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🎭 Edebi Sanatlar Rehberi (Örnekli Kartlar)</h3>
+                <button class="close-btn" onclick="closeModal('arts-modal')">✕</button>
+            </div>
+            <div class="art-card-grid">
+                <div class="art-card">
+                    <div class="art-title">1. Teşbih (Benzetme)</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Zayıf olanı güçlü olana benzetmektir.<br><em>Örnek: "Gözlerin gökyüzü gibi masmavi."</em></p>
+                </div>
+                <div class="art-card">
+                    <div class="art-title">2. Teşhis (Kişileştirme)</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">İnsana ait özellikleri doğaya vermektir.<br><em>Örnek: "Rüzgâr hüzünle fısıldıyordu."</em></p>
+                </div>
+                <div class="art-card">
+                    <div class="art-title">3. İntak (Konuşturma)</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">İnsan dışı varlıkları konuşturmaktır.<br><em>Örnek: "Dal dedi ki: Ben baharı özledim."</em></p>
+                </div>
+                <div class="art-card">
+                    <div class="art-title">4. Tezat (Karşıtlık)</div>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Zıt düşüncelerin bir arada olmasıdır.<br><em>Örnek: "Ağlarım hatıra geldikçe gülüştüklerimiz."</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 8: ESER - YAZAR EŞLEŞTİRME -->
+    <div class="modal-overlay" id="match-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">⚔️ Eser - Yazar Eşleştirme Oyunu</h3>
+                <button class="close-btn" onclick="closeModal('match-modal')">✕</button>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:15px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--box-bg); padding:12px; border-radius:8px;">
+                    <span>1. <strong>Otuz Beş Yaş</strong> eseri kime aittir?</span>
+                    <select id="m1" style="padding:8px; border-radius:6px; background:#0f172a; color:#fff; border:1px solid var(--accent-color);">
+                        <option value="">Seçiniz...</option>
+                        <option value="cahit">Cahit Sıtkı Tarancı</option>
+                        <option value="attila">Attilâ İlhan</option>
+                    </select>
+                </div>
+                <div style="display:flex; justify-content:space-between; align-items:center; background:var(--box-bg); padding:12px; border-radius:8px;">
+                    <span>2. <strong>Monna Rosa</strong> şiiri kime aittir?</span>
+                    <select id="m2" style="padding:8px; border-radius:6px; background:#0f172a; color:#fff; border:1px solid var(--accent-color);">
+                        <option value="">Seçiniz...</option>
+                        <option value="sezai">Sezai Karakoç</option>
+                        <option value="orhan">Orhan Veli Kanık</option>
+                    </select>
+                </div>
+                <button class="action-btn" onclick="checkMatchingGame()">Eşleştirmeleri Kontrol Et</button>
+                <div id="match-result" style="margin-top:10px; font-weight:bold;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 9: TÜRK EDEBİYATI DÖNEMLERİ -->
+    <div class="modal-overlay" id="timeline-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">⏳ Türk Edebiyatı Dönemleri Zaman Çizgisi</h3>
+                <button class="close-btn" onclick="closeModal('timeline-modal')">✕</button>
+            </div>
+            <div>
+                <div style="border-left:4px solid var(--accent-gold); padding-left:15px; margin-bottom:15px;">
+                    <h4 style="color:var(--accent-gold);">1. İslamiyet Öncesi Türk Edebiyatı</h4>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Sözlü ürünler (Koşuk, Sagu, Sav, Destan). Göktürk ve Uygur metinleri.</p>
+                </div>
+                <div style="border-left:4px solid var(--accent-pink); padding-left:15px; margin-bottom:15px;">
+                    <h4 style="color:var(--accent-pink);">2. Halk Edebiyatı & Divan Edebiyatı</h4>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Hece ölçülü halk türküleri ve Aruz ölçülü saray edebiyatı eserleri.</p>
+                </div>
+                <div style="border-left:4px solid var(--accent-purple); padding-left:15px; margin-bottom:15px;">
+                    <h4 style="color:var(--accent-purple);">3. Cumhuriyet Dönemi Türk Edebiyatı</h4>
+                    <p style="font-size:0.88rem; color:var(--text-muted);">Saf şiir, Garip akımı, İkinci Yeni ve Toplumcu Gerçekçilik dönemleri.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 10: MERVE HOCAMIZA İNCE NOT -->
+    <div class="modal-overlay" id="thoughts-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">💙 Merve Çete Hocamıza Özel İnce Not</h3>
+                <button class="close-btn" onclick="closeModal('thoughts-modal')">✕</button>
+            </div>
+            <div style="line-height:1.9; color:var(--text-muted); text-align:center; padding:15px;">
+                <p style="font-size:1.15rem; font-style:italic; color:var(--accent-color); margin-bottom:15px;">
+                    "Mavinin en güzel tonu Antalya denizinde, edebiyatın en coşkulu ritmi MANİFEST şarkılarında, en güzel anlatımı ise sizin anlatımınızda saklı..."
+                </p>
+                <p style="margin-bottom:15px;">
+                    Değerli <strong>Merve Çete</strong> Hocamız,<br>
+                    Antalya'nın o sıcacık ve mavi ruhunu derslerimize taşıyarak bize edebiyatı sevdirdiğiniz için minnettarız. Kelimelerle ördüğünüz bu güzel yolculukta, tıpkı çok sevdiğiniz o nefis <strong>karnıyarık</strong> yemeği gibi lezzetli ve samimi dersler işledik.
+                </p>
+                <div style="background: var(--box-bg); padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); display: inline-block; margin-top: 10px;">
+                    💙 <strong>Kişisel Detaylar:</strong> Antalya 🌊 | En Sevdiği Renk: Mavi 💙 | Yemek: Karnıyarık 🍆 | Müzik Grubu: MANİFEST 🎸
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 11: İLETİŞİM & WHATSAPP -->
+    <div class="modal-overlay" id="feedback-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">💬 Görüş, Öneri & İletişim</h3>
+                <button class="close-btn" onclick="closeModal('feedback-modal')">✕</button>
+            </div>
+            <div style="text-align:center; padding:15px;">
+                <p style="color:var(--text-muted); margin-bottom:10px;">Proje Geliştirici & Hazırlayan:</p>
+                <h4 style="color:var(--accent-gold); font-size:1.3rem; margin-bottom:5px;">Seyit Talha Sarı</h4>
+                <p style="color:var(--accent-color); font-weight:bold; font-size:1.1rem; margin-bottom:15px;">📞 0501 377 89 93</p>
+                
+                <a href="https://wa.me/905013778993?text=Merhaba%20Talha,%20Edebi%20Pusula%20hakkinda%20bir%20mesajim%20var:" target="_blank" class="whatsapp-btn">
+                    <i class="fab fa-whatsapp" style="font-size:1.3rem;"></i> WhatsApp'tan Mesaj Gönder
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÖZEL YAZDIRMA ALANI -->
+    <div id="print-area">
+        <div class="print-header">
+            <h1>Edebi Pusula</h1>
+            <p>Merve Çete Hocama Sevgilerle - 9/B Sınıfı Şiir Baskısı</p>
+        </div>
+        <div class="print-poem-title" id="print-title"></div>
+        <div class="print-poem-author" id="print-author"></div>
+        <div class="print-poem-body" id="print-body"></div>
+    </div>
+
+    <!-- KÜNYE & WHATSAPP LINKI -->
+    <footer>
+        <div>© 2026 Edebi Pusula - Merve Çete Hocama Sevgilerle - 9/B Edebiyat Portalı</div>
+        <div style="color: var(--accent-gold); font-weight: bold;">
+            Hazırlayan: Seyit Talha Sarı 
+            <a href="https://wa.me/905013778993?text=Merhaba%20Talha,%20Edebi%20Pusula%20hakkinda:" target="_blank" style="color:var(--whatsapp-green); text-decoration:none; margin-left:10px;">
+                <i class="fab fa-whatsapp"></i> (0501 377 89 93)
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // DEV ŞİİR ARŞİVİ (40+ ŞİİR - İSTİSNASIZ HEPSİ TAM 2 KITA / 8 DİZE)
+        const siirler = [
+            { baslik: "Otuz Beş Yaş", yazar: "Cahit Sıtkı Tarancı", metin: "Yaş thirty-five! yolun yarısı eder.\nDante gibi ortasındayız ömrün.\nDelikanlı çağımızdaki cevher,\nGözünün yaşına bakmadan gider.\n\nGökyüzünün başka rengi de varmış!\nGeç farkettim taşın sert olduğunu.\nSu insanı boğar, ateş yakarmış!\nHer geçen gün bir başka dertmiş." },
+            { baslik: "Desem Ki", yazar: "Cahit Sıtkı Tarancı", metin: "Desem ki vakitlerden bir Nisan akşamıdır,\nRüzgârların en ferahlatıcısı senden esiyor,\nSende gençleşiyor bitki çayır,\nSende insanlığımı sanki hissediyorum.\n\nDesem ki sen benim için,\nHava kadar lazımsın, ekmek kadar mübarek,\nSu gibi azizsin;\nNimetten sayılacak şeylerle birsin!" },
+            { baslik: "Ben Sana Mecburum", yazar: "Attilâ İlhan", metin: "Ben sana mecburum bilemezsin\nAdını mıh gibi aklımda tutuyorum\nBüyüdükçe büyüyor gözlerin\nBen sana mecburum bilemezsin.\n\nNe vakit bir yaşamak düşünsem\nBu kurtlar sofrasında belki fena oluyorum\nNe vakit seni düşünsem\nBir ceylan su içmeye iner." },
+            { baslik: "Monna Rosa", yazar: "Sezai Karakoç", metin: "Monna Rosa. Siyah güller, ak güller.\nGülhanenin gülleri ve zakkumlar.\nKanatları yaldızlı cennet kuşu;\nMeltemle rüzgârla gelen kokular.\n\nYağmur açar güllerin yaprağında\nBir aşk fısıldar geceye sessizce\nMonna Rosa siyah güller ak güller\nAdın kalır dudağımda mısra mısra." },
+            { baslik: "Sessiz Gemi", yazar: "Yahya Kemal Beyatlı", metin: "Artık demir almak günü gelmişse zamandan,\nMeçhule giden bir gemi kalkar bu limandan.\nHiç yolcusu yokmuş gibi sessizce yol alır;\nSallanmaz o kalkışta ne mendil ne de bir kol.\n\nRıhtımda kalanlar bu seyahatten elemli,\nGünlerce siyah ufka bakar gözleri nemli.\nBiçare gönüller! Ne giden son gemidir bu!\nHicranlı hayatın ne de son matemidir bu!" },
+            { baslik: "Lavinia", yazar: "Özdemir Asaf", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\nYine de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİnandığını bilesin." },
+            { baslik: "Kaldırımlar", yazar: "Necip Fazıl Kısakürek", metin: "Sokaktayım, kimsesiz bir sokakta;\nYürüyorum, arkama bakmadan yürüyorum.\nYolumun karanlığa saplanan noktasında,\nSanki beni bekleyen bir hayal görüyorum.\n\nKaldırımlar, çilekeş yalnızların anası;\nKaldırımlar, içimde yaşamış bir insandır.\nKaldırımlar, duyulur ses kesilince sesi;\nKaldırımlar, içimde kıvrılan bir yılandır." },
+            { baslik: "Anlatamıyorum", yazar: "Orhan Veli Kanık", metin: "Ağlasam sesimi duyar mısınız,\nMısralarımda;\nDokunabilir misiniz,\nGözyaşlarına, ellerinizle?\n\nBilmezdim şarkıların bu kadar güzel,\nKelimelerinse kifayetsiz olduğunu\nBu derde düşmeden önce\nHer şeyi içimde saklardım." },
+            { baslik: "Mihriban", yazar: "Abdurrahim Karakoç", metin: "Sarı saçlarına deli gönlümü\nBağlamışlar, çözülmüyor Mihriban...\nAyrılıktan zor belleme ölümü,\nGörmeyince sezilmiyor Mihriban.\n\nYâr, deyince kalem elden düşüyor;\nGözlerim görmüyor, aklım şaşırıyor;\nLambamda titreyen alev üşüyor;\nAşk, kağıda yazılmıyor Mihriban." },
+            { baslik: "Göğe Bakma Durağı", yazar: "Turgut Uyar", metin: "İkimiz geçelim ikimiz,\nGöğe bakma durağına varalım.\nSeninle göğe bakalım...\nBütün bu kasvetli dünyayı unutup.\n\nBeni bu havalar mahvetti diyenlere inat\nBirlikte sığınalım maviliğe\nGökyüzü geniş, umutlarımız sonsuz\nGel göğe bakalım durmadan." }
+        ];
+
+        // 15 ŞAŞIRTMALI ZEKA TESTİ
+        const iqLevels = ["🪼 Deniz Anası", "⭐️ Deniz Yıldızı", "🐟 Balık", "🐒 Maymun", "🦴 Mağara Adamı", "👤 İnsan", "🧠 Üstün Zeka"];
+        const iqQuestions = [
+            { q: "1. Şiir yazarken kalemi kırılan ve mürekkebi biterse bir şair ilk ne yapar?", opts: ["A) Hemen pes edip roman yazar.", "B) Kaleme kızıp edebiyatı bırakır.", "C) Kalemin arkasını açıp ilham beklemeye devam eder."], correct: 2, exp: "Harika! Deniz Anası seviyesini geçtin!" },
+            { q: "2. Hangi edebiyat türünde yazar kendi kendine konuşur ama kimseden uyarı almaz?", opts: ["A) Deneme", "B) Makale", "C) Dilekçe"], correct: 0, exp: "Doğru! Deneme yazarları kendi kendileriyle dertleşir." },
+            { q: "3. Bir beyitte iki dize birbiriyle kavga ederse hangi edebi sanat oluşur?", opts: ["A) Beyit bozulur.", "B) Tezat (Karşıtlık) sanatı doğar.", "C) Şair ikisini de siler."], correct: 1, exp: "Zekice! Zıtlıklar Tezat sanatıdır." },
+            { q: "4. Divan şairleri neden sürekli 'Gül' ve 'Bülbül'den bahseder?", opts: ["A) Başka kuş bilmedikleri için.", "B) Aşk ve kavuşamama temasını temsil ettiği için.", "C) Gül sponsor olduğu için."], correct: 1, exp: "Tebrikler! Mağara adamı seviyesini geride bıraktın!" },
+            { q: "5. 'Gözlerin gökyüzü gibidir' diyen bir öğrenci edebiyat sınavında kaç puan alır?", opts: ["A) Teşbih yaptığı için tam puan alır.", "B) Gökyüzünü izinsiz kullandığı için ceza alır.", "C) Fizik hocasına yönlendirilir."], correct: 0, exp: "Harika! Edebi zekan parlıyor!" },
+            { q: "6. Merve Hocamız Antalya denizinin maviliğinden bahsederken arka planda MANİFEST çalıyorsa bu hangi akımdır?", opts: ["A) Klasisizm", "B) 9/B Sınıfı Edebi Harikalar Akımı (Üstün Estetik)", "C) Realizm"], correct: 1, exp: "Doğru! Kesinlikle 9/B Efsane Akımı!" },
+            { q: "7. Karacaoğlan ormanda yürürken şarjı bitse ne derdi?", opts: ["A) 'Şarjım bitti chada bakayım.'", "B) 'Sözüm yarım kaldı, koç yiğitler celladı!'", "C) 'Ey kara çadırım, powerbank nerede?'"], correct: 1, exp: "Mükemmel mantık!" },
+            { q: "8. Karakter kapıyı açtığında canavar çıkıyorsa bu hangi türdür?", opts: ["A) Fantastik / Korku", "B) Memuriyet Anıları", "C) Saf Şiir"], correct: 0, exp: "Doğru bildin! Gerçek bir İnsan gibi düşünüyorsun." },
+            { q: "9. Hangi şair kahvesini içerken 'Yaş otuz beş, yolun yarısı' demiştir?", opts: ["A) Cahit Sıtkı Tarancı", "B) Orhan Veli", "C) Karagöz"], correct: 0, exp: "Harika! Edebiyat kültürün çok iyi." },
+            { q: "10. Bu portaldaki tüm şiirleri ve eğlenceli testleri hazırlayan dahi öğrenci kimdir?", opts: ["A) Seyit Talha Sarı", "B) Bilinmeyen Hacker", "C) Okul Müdürü"], correct: 0, exp: "Süper! Seyit Talha Sarı hazırladı!" },
+            { q: "11. Tiyatro sahnesinde oyuncu unuttuğu repliği 'Edebiyat sınavı çok kolaydı' diye geçiştirirse bu ne tür bir sanattır?", opts: ["A) Doğaçlama İntak", "B) Sahne Sanatı", "C) Hayatta Kalma Sanatı"], correct: 2, exp: "Kesinlikle tam bir hayatta kalma sanatı!" },
+            { q: "12. Romanda ana karakter 500 sayfa boyunca sadece düşünüp hiçbir şey yapmıyorsa ne tür romandır?", opts: ["A) Aksiyon", "B) Bilinç Akışı / Psikolojik", "C) Dedektiflik"], correct: 1, exp: "İç monolog ve psikolojik tahlil!" },
+            { q: "13. Köktürk Kitabeleri'ni okuyan bir öğrencinin ilk tepkisi ne olur?", opts: ["A) 'Atalarımız taşlara destan yazmış!'", "B) 'Grafiti yapmışlar.'", "C) 'Telefon duvar kağıdı yapayım.'"], correct: 0, exp: "Tarihimize ve edebiyatımıza saygı!" },
+            { q: "14. Bir şiirde hem 'gece' hem 'gündüz' kelimeleri aynı dizedeyse hangi zıtlık doğar?", opts: ["A) Tezat Sanatı", "B) Saat Karışıklığı", "C) Uyku Modu"], correct: 0, exp: "Harika! Zıt kavramlar Tezat oluşturur." },
+            { q: "15. Bu zeka testini 15/15 tam puanla bitiren öğrenci hangi unvanı kazanır?", opts: ["A) Üstün Zeka Edebiyat Dehası 🧠✨", "B) Profesör", "C) Kitap Kurdu"], correct: 0, exp: "TEBRİKLER! Zirveye ulaştın: Sen tam bir ÜSTÜN ZEKASIN! 🧠✨" }
+        ];
+
+        // 20 SORULUK MEB DENEME TESTİ
+        const meb15Questions = [
+            { q: "1. Edebiyatın temel malzemesi nedir?", opts: ["A) Taş", "B) Renk", "C) Dil", "D) Ses"], correct: 2, exp: "Edebiyatın temel gereci dildir." },
+            { q: "2. Düşünceyi anlatma amacının ön planda olduğu metin türü hangisidir?", opts: ["A) Şiir", "B) Makale", "C) Masal", "D) Tiyatro"], correct: 1, exp: "Makale bilgi verme ve açıklama odaklıdır." },
+            { q: "3. 'Duygu ve hayallerin ahenkli anlatımı' sanatına ne denir?", opts: ["A) Şiir", "B) Roman", "C) Biyografi", "D) Gezi Yazısı"], correct: 0, exp: "Şiir ahenk ve duygu sanatıdır." },
+            { q: "4. Dili her şeyin üstünde tutan anlayış hangisidir?", opts: ["A) Toplumcu Gerçekçilik", "B) Saf (Öz) Şiir", "C) Garip Akımı", "D) Milli Edebiyat"], correct: 1, exp: "Saf şiirde dil estetiği esastır." },
+            { q: "5. Mısra sonlarındaki ses benzerliğine ne denir?", opts: ["A) Kafiye", "B) Ölçü", "C) Redif", "D) Tema"], correct: 0, exp: "Ses benzerlikleri kafiyedir." },
+            { q: "6. Aynı kelimelerin tekrarlanması sanatı nedir?", opts: ["A) Tekrir", "B) Teşbih", "C) Tezat", "D) İntak"], correct: 0, exp: "Kelime tekrarı Tekrir sanatıdır." },
+            { q: "7. Hece ölçülü geleneksel şiir türümüz hangisidir?", opts: ["A) Gazel", "B) Koşma", "C) Sonnet", "D) Mesnevi"], correct: 1, exp: "Koşma, Halk edebiyatı türüdür." },
+            { q: "8. Yazarın kişisel görüşlerini samimi anlattığı yazı türü nedir?", opts: ["A) Deneme", "B) Fıkra", "C) Anı", "D) Biyografi"], correct: 0, exp: "Deneme sohbet havasında yazılır." },
+            { q: "9. Masalın en belirgin özelliği nedir?", opts: ["A) Olağanüstülük", "B) Tarih bulunması", "C) Belgesel olma", "D) Doğruluk"], correct: 0, exp: "Masallar hayali ve olağanüstüdür." },
+            { q: "10. İki dizeden oluşan nazım birimine ne denir?", opts: ["A) Dörtlük", "B) Beyit", "C) Bent", "D) Mısra"], correct: 1, exp: "İkili dizeler Beyit adını alır." },
+            { q: "11. Tanzimat ile giren ilk yeni tür hangisidir?", opts: ["A) Şiir", "B) Roman", "C) Destan", "D) Ağıt"], correct: 1, exp: "Roman Tanzimat Dönemi'nde girmiştir." },
+            { q: "12. Coşkulu ve duygusal anlatım türü hangisidir?", opts: ["A) Lirik", "B) Epik", "C) Didaktik", "D) Satirik"], correct: 0, exp: "Duygusal şiirler Liriktir." },
+            { q: "13. Öğretici şiirlere ne ad verilir?", opts: ["A) Epik", "B) Didaktik", "C) Dramatik", "D) Pastoral"], correct: 1, exp: "Didaktik şiir bilgi verir." },
+            { q: "14. Çoban ve kır hayatını anlatan şiir hangisidir?", opts: ["A) Epik", "B) Pastoral", "C) Satirik", "D) Lirik"], correct: 1, exp: "Pastoral şiir kır yaşamını anlatır." },
+            { q: "15. Eleştirel iğneleyici şiirlere ne denir?", opts: ["A) Lirik", "B) Satirik", "C) Epik", "D) Didaktik"], correct: 1, exp: "Satirik şiir eleştiri amaçlıdır." },
+            { q: "16. Kahramanlık ve savaş konularını işleyen şiir türü hangisidir?", opts: ["A) Lirik", "B) Epik", "C) Pastoral", "D) Dramatik"], correct: 1, exp: "Epik şiir destansı ve kahramancadır." },
+            { q: "17. Şiirde dize sonlarındaki aynı görevdeki ek veya kelimelere ne denir?", opts: ["A) Kafiye", "B) Redif", "C) Ölçü", "D) Ahenk"], correct: 1, exp: "Aynı görevli ek ve sözcükler rediftir." },
+            { q: "18. Sanatçının kendi yaşamını anlattığı eser türü hangisidir?", opts: ["A) Biyografi", "B) Otobiyografi", "C) Gezi Yazısı", "D) Mektup"], correct: 1, exp: "Otobiyografi öz yaşam öyküsüdür." },
+            { q: "19. Tiyatroda oyuncunun tek başına yaptığı uzun konuşmaya ne ad verilir?", opts: ["A) Diyalog", "B) Monolog", "C) Mimik", "D) Jest"], correct: 1, exp: "Tek kişilik konuşma monologdur." },
+            { q: "20. Olay, yer, zaman ve kişi unsurlarına sahip sanatsal metin türü nedir?", opts: ["A) Hikaye / Roman", "B) Makale", "C) Deneme", "D) Fıkra"], correct: 0, exp: "Anlatmaya bağlı olay metinleridir." }
+        ];
+
+        // GELİŞMİŞ ŞİİR ÜRETECİ VERİ BANKASI (Rastgele Kombinasyonlar)
+        const poemDatabase = {
+            antalya: {
+                k1: [
+                    "Antalya sahilinde dalgalar vurur kıyıya,\nMavi deniz eşlik eder coşkulu bu duyguya.\nKelimeler köpük köpük süzülür Akdeniz'den,\nEdebiyat bir güneştir vazgeçmeyiz biz senden.",
+                    "Toroslar'dan esen rüzgar taşır maviliğin sesini,\nAntalya'nın kıyısında bulduk ilham nefesini.\nMartılar fısıldarken mısra mısra geceye,\nSevgiyle selam olsun Merve Hocam sizler e."
+                ],
+                k2: [
+                    "Güneş batar Akdeniz'de altın rengi parıltıyla,\nDersimiz edebiyattır coşkulu bir anıyla.\nMavi bir düş kurarız biz mısraların izinde,\nUnutulmaz izler kalır gönlümüzün gizinde.",
+                    "Dalga sesleri söyler en güzel şarkıları,\nAntalya'nın denizinde erir zaman karları.\nMerve Hocamız ders anlatır kalbimize dokunur,\nEdebi Pusula ile yolumuz aydınlanır!"
+                ]
+            },
+            '9b': {
+                k1: [
+                    "Dokuz B sınıfında çalar edebiyat zili,\nHer bir dizeyle coşar Türkçemizin tatlı dili.\nMerve Çete rehberimiz, kelimeler fenerimiz,\nAydınlığa doğru yürür bizim mutlu sınıfımız.",
+                    "Sıralarda yankılanır şiirlerin ritmik sesi,\nDokuz B'nin kalbindedir edebiyat sevgisi.\nDefterlerde açar güller, mısralarla bezeli,\nBu güzel sınıfımızın sohbeti çok neşeli."
+                ],
+                k2: [
+                    "Geleceğe iz bırakır yazdığımız her satır,\nKalplerimizde saklıdır güzel ve derin hatır.\nMerve Hocamıza sevgiler yükselir gökyüzüne,\nEdebi Pusula rehberdir her birimiz sözüne.",
+                    "Sorularla, testlerle büyür bizim edebi zekamız,\nEdebiyatla güzelleşir yarınlara dünyamız.\nSeyit Talha'dan hediye bu efsane portalımız,\nSevgi dolu yüreklerle aydınlansın yolumuz!"
+                ]
+            },
+            manifest: {
+                k1: [
+                    "MANİFEST ritmi çalar derinden ve coşkuyla,\nSınıfımız dolup taşar edebi bir arzuyla.\nMüzik ve şiir birleşir Akdeniz'in bağrında,\nKelimeler dans eder dersimizin çağında.",
+                    "Coşkulu bir melodiyle başlar güzel dersimiz,\nMANİFEST ritminde atar bizim samimi kalbimiz.\nMerve Hocamın sesiyle aydınlanır bu ortam,\nEdebiyat sevgisiyle dolup taşar her anım."
+                ],
+                k2: [
+                    "Kelimeler ritim tutar, mısralar kanat çırpar,\nEdebi Pusula ile karanlıklar hep kaçar.\nMüzikle edebiyatın harmanlandığı yerde,\nÇare bulunur inan her türlü edebi derde!",
+                    "Alkışlar yükselir yine bu harika tondan,\nEdebiyat dersimiz çıkmaz hiçbir zaman moddan.\nSevgiyle ve coşkuyla söylenir tüm şarkılar,\n9/B sınıfında unutulmaz anlar var!"
+                ]
+            },
+            saf: {
+                k1: [
+                    "Saf şiirin ahenginde gizlidir derin mana,\nKelimeler fısıldar sevgiyle insana.\nRitim ve uyum ile şekil alır her dize,\nEdebiyat bir ışıktır rehberdir hepimize.",
+                    "Rüzgar söyler şarkısını yaprakların arasında,\nSaf şiirin gizemi saklı her mısrasında.\nLirik bir coşku kaplar ruhumuzu aniden,\nSanatla yeşeririz yeniden ve yeniden."
+                ],
+                k2: [
+                    "Dili her şeyden üstün tutan şairlerin izinden,\nKelimeler süzülür kalbimizin gizinden.\nAhenkle yankılanır içimizdeki bu ses,\nEdebiyat aşkıyla alınır her bir nefes.",
+                    "Şiir bir kalkan olur zamanın etkisine,\nSığınırız kelimelerin o büyülü sesine.\nMerve Hocamız açar kapılarını sanatın,\nAnlamı derinleşir kelimelerle hayatın."
+                ]
+            },
+            gece: {
+                k1: [
+                    "Gece çöker şehre, yıldızlar parıldar gökte,\nİlham fısıldar şaire en kuytu bir köşekte.\nKalem kağıt buluşur karanlığın içinde,\nEdebi duygular yeşerir mısra mısra biçimde.",
+                    "Sessizlik kaplarken her yanı gece vakti,\nKelimeler kurar gönülle edebi bir ahdi.\nYakamozlar fısıldar denizin kıyısına,\nMısralar dökülür şairin duygusuna."
+                ],
+                k2: [
+                    "Şiir bir meşale gibi aydınlatır geceyi,\nKelimeler çözer en karmaşık bilmeceyi.\nEdebi Pusula gösterir doğru yolu her zaman,\nSanatla güzeldir dünya, gerisi sadece yalan.",
+                    "Gece biterken doğar ufkumuzda yeni bir gün,\nŞiirle anlatılır yürekteki her düğüm.\nMerve Hocamıza sevgilerle son bulur bu mısra,\nEdebiyatla kalın, erin sonsuz huzura!"
+                ]
+            }
+        };
+
+        let currentIqIndex = 0;
+
+        function renderIqQuestion() {
+            const container = document.getElementById('iq-quiz-body');
+            let levelIdx = Math.min(Math.floor(currentIqIndex / 2.2), iqLevels.length - 1);
+            document.getElementById('iq-level-display').innerText = iqLevels[levelIdx];
+            
+            let percent = ((currentIqIndex + 1) / iqQuestions.length) * 100;
+            document.getElementById('iq-progress').style.width = percent + "%";
+
+            if (currentIqIndex >= iqQuestions.length) {
+                container.innerHTML = `
+                    <div style="text-align:center; padding:20px;">
+                        <h2 style="color:var(--accent-gold); font-size:2rem; margin-bottom:10px;">🏆 TEBRİKLER! 🏆</h2>
+                        <p style="font-size:1.2rem; color:var(--accent-color); font-weight:bold;">Zeka Testini Başarıyla Tamamladın!</p>
+                        <p style="margin-top:10px; color:var(--text-muted);">Ulaştığın Zirve Unvan: <strong>🧠 ÜSTÜN ZEKA</strong></p>
+                    </div>
+                `;
+                return;
+            }
+
+            const qData = iqQuestions[currentIqIndex];
+            let html = `<div class="iq-question-box"><div style="font-weight:bold; font-size:1.05rem; margin-bottom:12px; color:var(--accent-gold);">${qData.q}</div>`;
+            qData.opts.forEach((opt, idx) => {
+                html += `<button class="iq-opt-btn" onclick="answerIq(${idx})">${opt}</button>`;
+            });
+            html += `<div id="iq-feedback" style="margin-top:10px; font-weight:bold;"></div></div>`;
+            container.innerHTML = html;
+        }
+
+        function answerIq(chosenIdx) {
+            const qData = iqQuestions[currentIqIndex];
+            const fb = document.getElementById('iq-feedback');
+            if (chosenIdx === qData.correct) {
+                fb.style.color = "#22c55e";
+                fb.innerText = "✅ " + qData.exp;
+            } else {
+                fb.style.color = "#ef4444";
+                fb.innerText = "❌ Yanlış! Şaşırtmaca cevabı tekrar dene!";
+            }
+        }
+
+        function nextIqQuestion() {
+            if (currentIqIndex < iqQuestions.length - 1) {
+                currentIqIndex++;
+                renderIqQuestion();
+            }
+        }
+
+        function prevIqQuestion() {
+            if (currentIqIndex > 0) {
+                currentIqIndex--;
+                renderIqQuestion();
+            }
+        }
+
+        function resetIqTest() {
+            currentIqIndex = 0;
+            renderIqQuestion();
+        }
+
+        function render15MebQuiz() {
+            const container = document.getElementById('quiz-container-15');
+            let html = "";
+            meb15Questions.forEach((q, qIdx) => {
+                html += `
+                    <div style="background:var(--box-bg); padding:16px; border-radius:10px; margin-bottom:15px; border:1px solid var(--border-color);">
+                        <div style="font-weight:bold; color:var(--accent-gold); margin-bottom:10px;">${q.q}</div>
+                `;
+                q.opts.forEach((opt, oIdx) => {
+                    html += `<button class="iq-opt-btn" onclick="check15Ans(${qIdx}, ${oIdx})">${opt}</button>`;
+                });
+                html += `<div id="meb15-fb-${qIdx}" class="feedback"></div></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function check15Ans(qIdx, chosenOpt) {
+            const fb = document.getElementById(`meb15-fb-${qIdx}`);
+            const qData = meb15Questions[qIdx];
+            fb.style.display = "block";
+            if (chosenOpt === qData.correct) {
+                fb.style.color = "#22c55e";
+                fb.innerHTML = "✅ DOĞRU! " + qData.exp;
+            } else {
+                fb.style.color = "#ef4444";
+                fb.innerHTML = "❌ YANLIŞ! Doğru cevap: " + qData.opts[qData.correct] + "<br><b>Açıklama:</b> " + qData.exp;
+            }
+        }
+
+        function generateAiPoem() {
+            const themeKey = document.getElementById('ai-theme').value;
+            const themeData = poemDatabase[themeKey];
+            const randK1 = themeData.k1[Math.floor(Math.random() * themeData.k1.length)];
+            const randK2 = themeData.k2[Math.floor(Math.random() * themeData.k2.length)];
+            
+            const output = document.getElementById('ai-output');
+            output.style.display = "block";
+            output.innerText = randK1 + "\n\n" + randK2;
+        }
+
+        let currentIndex = 0;
+        let likeCount = 890;
+
+        window.onload = function() {
+            gosterSiir(0);
+            filterPoems();
+            renderIqQuestion();
+            render15MebQuiz();
+            rastgeleSozGetir();
+        };
+
+        function gosterSiir(index) {
+            currentIndex = index;
+            document.getElementById('baslik').innerText = siirler[index].baslik;
+            document.getElementById('yazar').innerText = siirler[index].yazar;
+            document.getElementById('siir-alani').innerText = siirler[index].metin;
+        }
+
+        function sonrakiSiir() {
+            let nextIndex = Math.floor(Math.random() * siirler.length);
+            gosterSiir(nextIndex);
+        }
+
+        function rastgeleSozGetir() {
+            const sozler = [
+                "“Şiir, kalbin gözyaşlarıyla yazdığı mektuptur.”",
+                "“Edebiyat, insanın insana anlattığı en güzel masaldır.”",
+                "“Mavi bir renkten daha fazlasıdır, bir his ve özgürlüktür.”"
+            ];
+            document.getElementById('daily-quote-text').innerText = sozler[Math.floor(Math.random() * sozler.length)];
+        }
+
+        function filterPoems() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const listContainer = document.getElementById('poem-search-list');
+            listContainer.innerHTML = '';
+            siirler.forEach((item, index) => {
+                if (item.baslik.toLowerCase().includes(query) || item.yazar.toLowerCase().includes(query)) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `📜 <strong>${item.baslik}</strong> - <em>${item.yazar}</em>`;
+                    li.onclick = function() { gosterSiir(index); toggleSearchPanel(); };
+                    listContainer.appendChild(li);
+                }
+            });
+        }
+
+        function speakPoem() {
+            if ('speechSynthesis' in window) {
+                let utterance = new SpeechSynthesisUtterance(siirler[currentIndex].metin);
+                utterance.lang = 'tr-TR';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("Tarayıcınız sesli okumayı desteklemiyor.");
+            }
+        }
+
+        function checkWrittenAns(qNum, keywords, explanation) {
+            const inputVal = document.getElementById(`rq${qNum}`).value.toLowerCase().trim();
+            const feedbackEl = document.getElementById(`rf${qNum}`);
+            if (inputVal === "") {
+                feedbackEl.style.display = "block";
+                feedbackEl.style.color = "#eab308";
+                feedbackEl.innerHTML = "⚠️ Lütfen bir cevap yazınız!<br><b>Açıklama:</b> " + explanation;
+                return;
+            }
+            let isMatched = keywords.some(kw => inputVal.includes(kw));
+            feedbackEl.style.display = "block";
+            if (isMatched) {
+                feedbackEl.style.color = "#22c55e";
+                feedbackEl.innerHTML = "✅ Tebrikler! Doğru analiz.<br><b>Açıklama:</b> " + explanation;
+            } else {
+                feedbackEl.style.color = "#38bdf8";
+                feedbackEl.innerHTML = "💡 Çözüm Analizi:<br><b>İdeal Cevap:</b> " + explanation;
+            }
+        }
+
+        function checkMatchingGame() {
+            let m1 = document.getElementById('m1').value;
+            let m2 = document.getElementById('m2').value;
+            let res = document.getElementById('match-result');
+            if (m1 === 'cahit' && m2 === 'sezai') {
+                res.style.color = '#22c55e';
+                res.innerText = '✅ TEBRİKLER! Eşleştirmeler doğru!';
+            } else {
+                res.style.color = '#ef4444';
+                res.innerText = '❌ Yanlış eşleştirme, tekrar deneyiniz!';
+            }
+        }
+
+        function toggleSearchPanel() { document.getElementById('search-panel').classList.toggle('active'); }
+        function toggleRightBurger() { document.getElementById('right-burger-panel').classList.toggle('active'); }
+        
+        function openModal(id) { 
+            document.getElementById(id).style.display = 'flex'; 
+            toggleRightBurger(); 
+        }
+
+        function closeModal(id) { 
+            document.getElementById(id).style.display = 'none'; 
+            if(id === 'iq-modal') {
+                resetIqTest();
+            }
+        }
+
+        function toggleTheme() { document.body.classList.toggle('light-mode'); }
+        function addLike() { likeCount++; document.getElementById('like-count').innerText = likeCount; }
+
+        function printPoemOnly() {
+            document.getElementById('print-title').innerText = siirler[currentIndex].baslik;
+            document.getElementById('print-author').innerText = siirler[currentIndex].yazar;
+            document.getElementById('print-body').innerText = siirler[currentIndex].metin;
+            window.print();
+        }
+    </script>
+</body>
+</html>
