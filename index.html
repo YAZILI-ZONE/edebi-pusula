@@ -571,6 +571,9 @@
             <li onclick="openModal('iq-modal')">🧠 Evrimsel Edebiyat Zeka Testi (15 Soru)</li>
             <li onclick="openModal('quiz-modal')">📝 MEB 9. Sınıf Online Deneme (20 Soru)</li>
             <li onclick="openModal('reading-modal')">📖 Okuduğunu Anlama & Yazılı Analiz (6 Soru)</li>
+            <li onclick="openModal('game-ai-modal')">🎮 Şair mi? Yapay Zeka mı? Oyunu</li>
+            <li onclick="openModal('wheel-modal')">🎡 Edebiyat Çarkıfeleği & Günün Görevi</li>
+            <li onclick="openModal('box-modal')">💌 9/B Edebi Dilek Kutusu</li>
             <li onclick="openModal('songs-modal')">🎵 Bestelenmiş Şiirler & MANİFEST Köşesi</li>
             <li onclick="openModal('dict-modal')">📚 Günün Derin Kelimesi & Sözlük</li>
             <li onclick="openModal('arts-modal')">🎭 Edebi Sanatlar Rehberi (Örnekli Kartlar)</li>
@@ -652,7 +655,7 @@
         </div>
     </div>
 
-    <!-- MODAL 1: SANAL EDEBİ ASİSTAN (GELİŞMİŞ ŞİİR ÜRETECİ - 5 TEMA) -->
+    <!-- MODAL 1: SANAL EDEBİ ASİSTAN -->
     <div class="modal-overlay" id="ai-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -670,6 +673,59 @@
                 </select>
                 <button class="action-btn" onclick="generateAiPoem()">✨ Özgün Şiir Üret</button>
                 <div id="ai-output" style="margin-top:15px; background:rgba(0,0,0,0.4); padding:18px; border-radius:8px; font-style:italic; white-space:pre-line; color:var(--accent-gold); display:none; line-height:1.8; font-size:1.05rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YENİ MODAL: ŞAİR Mİ, YAPAY ZEKA MI? -->
+    <div class="modal-overlay" id="game-ai-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🎮 Şair mi? Yapay Zeka mı?</h3>
+                <button class="close-btn" onclick="closeModal('game-ai-modal')">✕</button>
+            </div>
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px; text-align:center;">
+                <p style="color:var(--text-muted); margin-bottom:15px;">Aşağıdaki mısrayı oku ve karar ver: Bu gerçek bir usta şairin kalemi mi, yoksa yapay zekanın eseri mi?</p>
+                <div id="ai-game-verse" style="font-size:1.15rem; color:var(--accent-gold); font-style:italic; line-height:1.8; background:rgba(0,0,0,0.3); padding:20px; border-radius:8px; margin-bottom:20px;">Yükleniyor...</div>
+                <div style="display:flex; justify-content:center; gap:15px;">
+                    <button class="action-btn" onclick="checkAiGame('sair')">📜 Gerçek Şair</button>
+                    <button class="action-btn" onclick="checkAiGame('ai')">🤖 Yapay Zeka</button>
+                </div>
+                <div id="ai-game-result" style="margin-top:15px; font-weight:bold; font-size:1.05rem;"></div>
+                <button class="action-btn" onclick="nextAiGameQuestion()" style="margin-top:15px; display:none;" id="ai-game-next-btn">Sıradaki Mısra ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- YENİ MODAL: EDEBİYAT ÇARKIFELEĞİ -->
+    <div class="modal-overlay" id="wheel-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">🎡 Edebiyat Çarkıfeleği & Günün Görevi</h3>
+                <button class="close-btn" onclick="closeModal('wheel-modal')">✕</button>
+            </div>
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px; text-align:center;">
+                <p style="color:var(--text-muted); margin-bottom:15px;">Çarkı çevir ve 9/B sınıfı için günün edebi görevini veya şanslı kelimeni öğren!</p>
+                <div id="wheel-display" style="font-size:1.6rem; font-weight:bold; color:var(--accent-gold); background:rgba(0,0,0,0.4); padding:30px; border-radius:12px; border:2px dashed var(--accent-color); margin-bottom:20px;">Çarkı çevirmek için butona tıkla! 🎯</div>
+                <button class="action-btn" onclick="spinWheel()" style="font-size:1.05rem; padding:12px 24px;">🎡 Çarkı Çevir!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- YENİ MODAL: 9/B EDEBİ DİLEK KUTUSU -->
+    <div class="modal-overlay" id="box-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">💌 9/B Edebi Dilek & Mesaj Kutusu</h3>
+                <button class="close-btn" onclick="closeModal('box-modal')">✕</button>
+            </div>
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px;">
+                <p style="color:var(--text-muted); margin-bottom:12px;">Merve Hocamıza veya 9/B sınıfına gizli / açık edebi bir not bırak:</p>
+                <input type="text" id="box-author" class="written-input" placeholder="Adınız / Soyadınız (İsteğe bağlı)">
+                <textarea id="box-message" class="written-input" rows="4" placeholder="Dileğinizi veya mesajınızı buraya yazın..."></textarea>
+                <button class="action-btn" onclick="submitWishBox()">Mesajı Pano Tahtasına Ekle</button>
+                <div id="wish-success" style="color:#22c55e; font-weight:bold; margin-top:10px; display:none;">✅ Mesajınız başarıyla eklandı!</div>
+                <div id="wish-board" style="margin-top:20px; max-height:200px; overflow-y:auto; display:flex; flex-direction:column; gap:10px;"></div>
             </div>
         </div>
     </div>
@@ -959,12 +1015,93 @@
             { baslik: "Ben Sana Mecburum", yazar: "Attilâ İlhan", metin: "Ben sana mecburum bilemezsin\nAdını mıh gibi aklımda tutuyorum\nBüyüdükçe büyüyor gözlerin\nBen sana mecburum bilemezsin.\n\nNe vakit bir yaşamak düşünsem\nBu kurtlar sofrasında belki fena oluyorum\nNe vakit seni düşünsem\nBir ceylan su içmeye iner." },
             { baslik: "Monna Rosa", yazar: "Sezai Karakoç", metin: "Monna Rosa. Siyah güller, ak güller.\nGülhanenin gülleri ve zakkumlar.\nKanatları yaldızlı cennet kuşu;\nMeltemle rüzgârla gelen kokular.\n\nYağmur açar güllerin yaprağında\nBir aşk fısıldar geceye sessizce\nMonna Rosa siyah güller ak güller\nAdın kalır dudağımda mısra mısra." },
             { baslik: "Sessiz Gemi", yazar: "Yahya Kemal Beyatlı", metin: "Artık demir almak günü gelmişse zamandan,\nMeçhule giden bir gemi kalkar bu limandan.\nHiç yolcusu yokmuş gibi sessizce yol alır;\nSallanmaz o kalkışta ne mendil ne de bir kol.\n\nRıhtımda kalanlar bu seyahatten elemli,\nGünlerce siyah ufka bakar gözleri nemli.\nBiçare gönüller! Ne giden son gemidir bu!\nHicranlı hayatın ne de son matemidir bu!" },
-            { baslik: "Lavinia", yazar: "Özdemir Asaf", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\Yine de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİnandığını bilesin." },
+            { baslik: "Lavinia", yazar: "Özdemir Asaf", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\nYine de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİnandığını bilesin." },
             { baslik: "Kaldırımlar", yazar: "Necip Fazıl Kısakürek", metin: "Sokaktayım, kimsesiz bir sokakta;\nYürüyorum, arkama bakmadan yürüyorum.\nYolumun karanlığa saplanan noktasında,\nSanki beni bekleyen bir hayal görüyorum.\n\nKaldırımlar, çilekeş yalnızların anası;\nKaldırımlar, içimde yaşamış bir insandır.\nKaldırımlar, duyulur ses kesilince sesi;\nKaldırımlar, içimde kıvrılan bir yılandır." },
-            { baslik: "Anlatamıyorum", yazar: "Orhan Veli Kanık", metin: "Ağlasam sesimi duyar mısınız,\nMısralarımda;\nDokunabilir misiniz,\nGözyaşlarına, ellerinizle?\n\nBilmezdim şarkıların bu kadar güzel,\nKelimelerinse kifayetsiz olduğunu\nBu derde düşmeden önce\nHer şeyi içimde saklardım." },
+            { baslik: "Anlatamıyorum", yazar: "Orhan Veli Kanık", metin: "Ağlasam sesimi duyar mısınız,\nMısralarımda;\nDokunabilir misiniz,\ gözyaşlarına, ellerinizle?\n\nBilmezdim şarkıların bu kadar güzel,\nKelimelerinse kifayetsiz olduğunu\nBu derde düşmeden önce\nHer şeyi içimde saklardım." },
             { baslik: "Mihriban", yazar: "Abdurrahim Karakoç", metin: "Sarı saçlarına deli gönlümü\nBağlamışlar, çözülmüyor Mihriban...\nAyrılıktan zor belleme ölümü,\nGörmeyince sezilmiyor Mihriban.\n\nYâr, deyince kalem elden düşüyor;\nGözlerim görmüyor, aklım şaşırıyor;\nLambamda titreyen alev üşüyor;\nAşk, kağıda yazılmıyor Mihriban." },
-            { baslik: "Göğe Bakma Durağı", yazar: "Turgut Uyar", metin: "İkimiz geçelim ikimiz,\nGöğe bakma durağına varalım.\nSeninle göğe bakalım...\nBütün bu kasvetli dünyayı unutup.\n\nBeni bu havalar mahvetti diyenlere inat\nBirlikte sığınalım maviliğe\nGökyüzü geniş, umutlarımız sonsuz\nGel göğe bakalım durmadan." }
+            { baslik: "Göğe Bakma Durağı", yazar: "Turgut Uyar", metin: "İkimiz geçelim ikimiz,\nGöğe bakma durağına varalım.\nSeninle göğe bakalım...\nBütün bu kasvetli dünyayı unutup.\n\nBeni bu havalar mahvetti diyenlere inat\nBirlikte sığınalım maviliğe\Gökyüzü geniş, umutlarımız sonsuz\nGel göğe bakalım durmadan." }
         ];
+
+        // ŞAİR Mİ, YAPAY ZEKA MI? VERİLERİ
+        const aiGameQuestions = [
+            { text: "Antalya'nın turkuaz dalgaları vurur kıyıya,\n9/B sınıfı kulak verir coşkulu bu duyguya.", type: "ai", exp: "Bu mısraları sitemizin yapay zeka asistanı senin için yazdı!" },
+            { text: "Ben sana mecburum bilemezsin\nAdını mıh gibi aklımda tutuyorum", type: "sair", exp: "Bu ölümsüz dizeler Attilâ İlhan'a aittir." },
+            { text: "Merve Hocam ders anlatır mavi denizler eşliğinde,\nEdebiyat coşkusu saklıdır 9/B'nin kalbinde.", type: "ai", exp: "Bu da yapay zeka asistanımızın ürettiği özel bir mısra!" },
+            { text: "Yaş thirty-five! yolun yarısı eder.\nDante gibi ortasındayız ömrün.", type: "sair", exp: "Bu harika dizeler Cahit Sıtkı Tarancı'nın Otuz Beş Yaş şiirindendir." }
+        ];
+        let currentAiGameIdx = 0;
+
+        function renderAiGame() {
+            if(currentAiGameIdx >= aiGameQuestions.length) currentAiGameIdx = 0;
+            const q = aiGameQuestions[currentAiGameIdx];
+            document.getElementById('ai-game-verse').innerText = q.text;
+            document.getElementById('ai-game-result').innerText = "";
+            document.getElementById('ai-game-next-btn').style.display = "none";
+        }
+
+        function checkAiGame(choice) {
+            const q = aiGameQuestions[currentAiGameIdx];
+            const res = document.getElementById('ai-game-result');
+            if(choice === q.type) {
+                res.style.color = "#22c55e";
+                res.innerText = "✅ Doğru tahmin! " + q.exp;
+            } else {
+                res.style.color = "#ef4444";
+                res.innerText = "❌ Yanlış! " + q.exp;
+            }
+            document.getElementById('ai-game-next-btn').style.display = "inline-block";
+        }
+
+        function nextAiGameQuestion() {
+            currentAiGameIdx++;
+            renderAiGame();
+        }
+
+        // ÇARKIFELEK GÖREVLERİ
+        const wheelTasks = [
+            "🏆 Günün Görevi: Sınıfta en sevdiğin şiirden 2 dize oku!",
+            "💙 Günün Edebi Sözü: 'Bergüzar' kelimesini bugün cümle içinde kullan.",
+            "🌟 Şanslı Gün: Merve Hocana bugün ders için teşekkür et!",
+            "🎸 Ritim Zamanı: İçinden MANİFEST şarkısı mırıldanarak dersi dinle.",
+            "🌊 Antalya Modu: Akdeniz maviliğini hayal ederek 5 dakika kitap oku."
+        ];
+
+        function spinWheel() {
+            const display = document.getElementById('wheel-display');
+            display.innerText = "Çark dönüyor... 🌀";
+            setTimeout(() => {
+                const rand = wheelTasks[Math.floor(Math.random() * wheelTasks.length)];
+                display.innerText = rand;
+            }, 600);
+        }
+
+        // 9/B DİLEK KUTUSU
+        let wishesList = [
+            { author: "Merve Hoca", text: "9/B sınıfı ile edebiyat bir harika! 💙" },
+            { author: "Seyit Talha", text: "Edebi Pusula hepimize başarı getirsin!" }
+        ];
+
+        function renderWishes() {
+            const board = document.getElementById('wish-board');
+            board.innerHTML = "";
+            wishesList.forEach(w => {
+                board.innerHTML += `<div style="background:rgba(0,0,0,0.3); padding:10px; border-radius:6px; border-left:3px solid var(--accent-gold); font-size:0.9rem;"><strong>${w.author}:</strong> ${w.text}</div>`;
+            });
+        }
+
+        function submitWishBox() {
+            const author = document.getElementById('box-author').value.trim() || "Anonim 9/B Öğrencisi";
+            const text = document.getElementById('box-message').value.trim();
+            if(!text) {
+                alert("Lütfen bir mesaj yazınız.");
+                return;
+            }
+            wishesList.unshift({ author, text });
+            renderWishes();
+            document.getElementById('box-message').value = "";
+            document.getElementById('wish-success').style.display = "block";
+            setTimeout(() => { document.getElementById('wish-success').style.display = "none"; }, 3000);
+        }
 
         // 15 ŞAŞIRTMALI ZEKA TESTİ
         const iqLevels = ["🪼 Deniz Anası", "⭐️ Deniz Yıldızı", "🐟 Balık", "🐒 Maymun", "🦴 Mağara Adamı", "👤 İnsan", "🧠 Üstün Zeka"];
@@ -1010,7 +1147,7 @@
             { q: "20. Olay, yer, zaman ve kişi unsurlarına sahip sanatsal metin türü nedir?", opts: ["A) Hikaye / Roman", "B) Makale", "C) Deneme", "D) Fıkra"], correct: 0, exp: "Anlatmaya bağlı olay metinleridir." }
         ];
 
-        // GELİŞMİŞ ŞİİR ÜRETECİ VERİ BANKASI (Rastgele Kombinasyonlar)
+        // GELİŞMİŞ ŞİİR ÜRETECİ VERİ BANKASI
         const poemDatabase = {
             antalya: {
                 k1: [
@@ -1174,6 +1311,8 @@
             renderIqQuestion();
             render15MebQuiz();
             rastgeleSozGetir();
+            renderAiGame();
+            renderWishes();
         };
 
         function gosterSiir(index) {
