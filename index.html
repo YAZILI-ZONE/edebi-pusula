@@ -112,17 +112,17 @@
 </head>
 <body>
 
-    <!-- Sol Arama Paneli (Dev Şiir Arşivi - Zenginleştirilmiş) -->
+    <!-- Sol Arama Paneli (Dev Şiir Arşivi) -->
     <div class="search-panel" id="search-panel">
         <div class="panel-header">
-            <h2 style="color: var(--accent-gold); font-size:1.15rem;">📜 Dev Şiir Koleksiyonu (Zenginleştirilmiş)</h2>
+            <h2 style="color: var(--accent-gold); font-size:1.15rem;">📜 Dev Şiir Koleksiyonu (Genişletilmiş)</h2>
             <button class="close-btn" onclick="toggleSearchPanel()">✕</button>
         </div>
         <input type="text" class="search-box-input" id="search-input" placeholder="Şiir veya Şair İsmi..." oninput="filterPoems()">
         <ul class="poem-search-list" id="poem-search-list"></ul>
     </div>
 
-    <!-- Sağ Burger Menü (Edebi Pusula Tüm Modüller) -->
+    <!-- Sağ Burger Menü (Genişletilmiş Modüller) -->
     <div class="right-burger-panel" id="right-burger-panel">
         <div class="panel-header">
             <h2 style="color: var(--accent-color); font-size:1.15rem;">🧭 Edebi Pusula Menüsü</h2>
@@ -132,9 +132,11 @@
             <li onclick="openModal('karaoke-modal')">🎤 Mısra Tamamlama & Karaoke Oyunu</li>
             <li onclick="openModal('taboo-modal')">🕵️ Gizli Edebi Ajan (Tabu / Yasaklı Kelime)</li>
             <li onclick="openModal('fortune-modal')">🧙‍♂️ Edebi Kehanet & Şans Kütüğü</li>
-            <li onclick="openModal('polls-modal')">📊 9/B Sınıfının "En"leri Anketi</li>
+            <li onclick="openModal('polls-modal')">📊 9/B Sınıfının "En"leri Anketi (Genişletilmiş)</li>
             <li onclick="openModal('persona-modal')">🎭 Hangi Edebi Karakter Sensin? (Test)</li>
             <li onclick="openModal('puzzle-modal')">⏱️ Hızlı Edebiyat Kelime Bulmaca</li>
+            <li onclick="openModal('memory-modal')">🧠 Edebi Hafıza & Kart Eşleştirme Oyunu [YENİ]</li>
+            <li onclick="openModal('riddle-modal')">🧩 Günün Edebi Bilmecesi & Bulmacası [YENİ]</li>
             <li onclick="openModal('postit-modal')">🎨 Sınıfın Renkli Şiir & Post-it Duvarı</li>
             <li onclick="openModal('scoreboard-modal')">🏆 9/B Sınıfı Edebiyat Liderlik Tablosu</li>
             <li onclick="openModal('ai-modal')">🤖 Sanal Edebi Asistan (Şiir Üreteci)</li>
@@ -211,7 +213,7 @@
         </div>
     </div>
 
-    <!-- MODAL 1: MISRA TAMAMLAMA & KARAOKE -->
+    <!-- MODAL 1: KARAOKE -->
     <div class="modal-overlay" id="karaoke-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -228,7 +230,7 @@
         </div>
     </div>
 
-    <!-- MODAL 2: GİZLİ EDEBİ AJAN (TABU) -->
+    <!-- MODAL 2: TABU -->
     <div class="modal-overlay" id="taboo-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -247,7 +249,7 @@
         </div>
     </div>
 
-    <!-- MODAL 3: EDEBİ KEHANET & FALI -->
+    <!-- MODAL 3: KEHANET -->
     <div class="modal-overlay" id="fortune-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -262,28 +264,86 @@
         </div>
     </div>
 
-    <!-- MODAL 4: SINIFIN EN'LERİ ANKETİ -->
+    <!-- MODAL 4: GENİŞLETİLMİŞ SINIFIN EN'LERİ ANKETİ -->
     <div class="modal-overlay" id="polls-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">📊 9/B Sınıfının "En"leri Anketi</h3>
+                <h3 class="modal-title">📊 9/B Sınıfının "En"leri Anketi (Genişletilmiş)</h3>
                 <button class="close-btn" onclick="closeModal('polls-modal')">✕</button>
             </div>
-            <div style="background:var(--box-bg); padding:20px; border-radius:10px;">
-                <p style="color:var(--text-muted); margin-bottom:15px;">Haftalık sınıfiçi edebi oylamamıza katıl:</p>
-                <div style="margin-bottom:15px;">
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px; max-height:60vh; overflow-y:auto;">
+                <p style="color:var(--text-muted); margin-bottom:15px;">Haftalık sınıfiçi edebi oylamamıza katıl, oylarını ver:</p>
+                
+                <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
                     <strong>1. Bu haftanın en şair ruhlu öğrencisi kim?</strong>
-                    <div style="display:flex; gap:10px; margin-top:8px;">
-                        <button class="action-btn" onclick="votePoll(1)">Seyit Talha</button>
-                        <button class="action-btn" onclick="votePoll(2)">Tüm 9/B Sınıfı</button>
+                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn" onclick="votePoll(1, 'Seyit Talha')">Seyit Talha</button>
+                        <button class="action-btn" onclick="votePoll(1, 'Zeynep')">Zeynep</button>
+                        <button class="action-btn" onclick="votePoll(1, 'Tüm 9/B')">Tüm 9/B Sınıfı</button>
                     </div>
                 </div>
-                <div id="poll-result" style="color:var(--accent-gold); font-weight:bold; margin-top:10px;"></div>
+
+                <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
+                    <strong>2. En havalı ve estetik el yazısı kimde?</strong>
+                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn" onclick="votePoll(2, 'Merve Hoca')">Merve Hoca</button>
+                        <button class="action-btn" onclick="votePoll(2, 'Elif')">Elif</button>
+                        <button class="action-btn" onclick="votePoll(2, 'Ahmet')">Ahmet</button>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
+                    <strong>3. Sınavlarda en hızlı şiir ezberleyen mucize kim?</strong>
+                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn" onclick="votePoll(3, 'Kerem')">Kerem</button>
+                        <button class="action-btn" onclick="votePoll(3, 'İrem')">İrem</button>
+                        <button class="action-btn" onclick="votePoll(3, 'Seyit Talha')">Seyit Talha</button>
+                    </div>
+                </div>
+
+                <div style="margin-bottom:10px;">
+                    <strong>4. En neşeli ve dersi en çok renklendiren kim?</strong>
+                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn" onclick="votePoll(4, 'Tüm Sınıf')">Tüm 9/B Ekibi</button>
+                        <button class="action-btn" onclick="votePoll(4, 'Merve Hoca')">Merve Hoca</button>
+                    </div>
+                </div>
+
+                <div id="poll-result" style="color:var(--accent-gold); font-weight:bold; margin-top:15px; font-size:1.1rem; text-align:center;"></div>
             </div>
         </div>
     </div>
 
-    <!-- DİĞER TÜM MEVCUT MODULLER -->
+    <!-- MODAL 5: YENİ - EDEBİ HAFIZA OYUNU -->
+    <div class="modal-overlay" id="memory-modal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 class="modal-title">🧠 Edebi Hafıza & Bilgi Kartları</h3><button class="close-btn" onclick="closeModal('memory-modal')">✕</button></div>
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px; text-align:center;">
+                <p style="color:var(--text-muted); margin-bottom:15px;">Kartın üzerine tıklayarak yazarını veya tanımını öğren:</p>
+                <div id="flashcard" onclick="flipCard()" style="background:rgba(56,189,248,0.1); border:2px solid var(--accent-color); padding:40px; border-radius:12px; font-size:1.3rem; color:var(--accent-gold); cursor:pointer; min-height:160px; display:flex; align-items:center; justify-content:center; margin-bottom:15px;">
+                    Eser: "Otuz Beş Yaş" (Kartı Çevir 🔄)
+                </div>
+                <button class="action-btn" onclick="nextCard()">Sonraki Kart ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 6: YENİ - GÜNÜN EDEBİ BİLMECESİ -->
+    <div class="modal-overlay" id="riddle-modal">
+        <div class="modal-content">
+            <div class="modal-header"><h3 class="modal-title">🧩 Günün Edebi Bilmecesi</h3><button class="close-btn" onclick="closeModal('riddle-modal')">✕</button></div>
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px; text-align:center;">
+                <p style="color:var(--accent-gold); font-size:1.2rem; font-style:italic; line-height:1.8; margin-bottom:20px;">
+                    "Kat kat giyinir, soğuktan korumaz, içi açıldıkça dünyaları sığdırır. O nedir?"
+                </p>
+                <input type="text" id="riddle-input" class="written-input" placeholder="Cevabını yaz...">
+                <button class="action-btn" onclick="checkRiddle()">Cevabı Kontrol Et</button>
+                <div id="riddle-feedback" style="margin-top:12px; font-weight:bold;"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DİĞER MODALLER -->
     <div class="modal-overlay" id="persona-modal">
         <div class="modal-content">
             <div class="modal-header"><h3 class="modal-title">🎭 Hangi Edebi Karakter Sensin?</h3><button class="close-btn" onclick="closeModal('persona-modal')">✕</button></div>
@@ -524,17 +584,15 @@
     </footer>
 
     <script>
-        // DEV ZENGİN ŞİİR ARŞİVİ
         const siirler = [
             { baslik: "Otuz Beş Yaş", yazar: "Cahit Sıtkı Tarancı", metin: "Yaş thirty-five! yolun yarısı eder.\nDante gibi ortasındayız ömrün.\nDelikanlı çağımızdaki cevher,\nGözünün yaşına bakmadan gider.\n\nGökyüzünün başka rengi de varmış!\nGeç farkettim taşın sert olduğunu.\nSu insanı boğar, ateş yakarmış!\nHer geçen gün bir başka dertmiş." },
             { baslik: "Desem Ki", yazar: "Cahit Sıtkı Tarancı", metin: "Desem ki vakitlerden bir Nisan akşamıdır,\nRüzgârların en ferahlatıcısı senden esiyor,\nSende gençleşiyor bitki çayır,\nSende insanlığımı sanki hissediyorum.\n\nDesem ki sen benim için,\nHava kadar lazımsın, ekmek kadar mübarek,\nSu gibi azizsin;\nNimetten sayılacak şeylerle birsin!" },
             { baslik: "Ben Sana Mecburum", yazar: "Attilâ İlhan", metin: "Ben sana mecburum bilemezsin\nAdını mıh gibi aklımda tutuyorum\nBüyüdükçe büyüyor gözlerin\nBen sana mecburum bilemezsin.\n\nNe vakit bir yaşamak düşünsem\nBu kurtlar sofrasında belki fena oluyorum\nNe vakit seni düşünsem\nBir ceylan su içmeye iner." },
             { baslik: "Monna Rosa", yazar: "Sezai Karakoç", metin: "Monna Rosa. Siyah güller, ak güller,\nGülhanenin gülleri ve zakkumlar.\nKanatları yaldızlı cennet kuşu;\nMeltemle rüzgârla gelen kokular.\n\nYağmur açar güllerin yaprağında\nBir aşk fısıldar geceye sessizce\nMonna Rosa siyah güller ak güller\nAdın kalır dudağımda mısra mısra." },
             { baslik: "Sessiz Gemi", yazar: "Yahya Kemal Beyatlı", metin: "Artık demir almak günü gelmişse zamandan,\nMeçhule giden bir gemi kalkar bu limandan.\nHiç yolcusu yokmuş gibi sessizce yol alır;\nSallanmaz o kalkışta ne mendil ne de bir kol.\n\nRıhtımda kalanlar bu seyahatten elemli,\nGünlerce siyah ufka bakar gözleri nemli.\nBiçare gönüller! Ne giden son gemidir bu!\nHicranlı hayatın ne de son matemidir bu!" },
-            { baslik: "Lavinia", yazar: "Özdemir Asaf", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\nYine de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİnandığını bilesin." }
+            { baslik: "Lavinia", yazar: "Özdemir Asaf", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\Yine de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİnandığını bilesin." }
         ];
 
-        // MISRA KARAOKE OYUNU
         const karaokeData = [
             { text: "Yaş thirty-five! yolun yarısı eder.\nDante gibi ortasındayız ömrün.\nDelikanlı çağımızdaki cevher,\n...", opts: ["Gözünün yaşına bakmadan gider.", "Bir sabah ansızın çıkıp gelir.", "Dünyanın en güzel çiçeğidir."], correct: 0 },
             { text: "Artık demir almak günü gelmişse zamandan,\nMeçhule giden bir gemi kalkar bu limandan.\nHiç yolcusu yokmuş gibi sessizce yol alır;\n...", opts: ["Rüzgarı arkasına alıp uçar.", "Sallanmaz o kalkışta ne mendil ne de bir kol.", "Göklerde arar bulur aşkını."], correct: 1 }
@@ -569,7 +627,6 @@
 
         function nextKaraoke() { karaokeIdx++; renderKaraoke(); }
 
-        // TABU KARTLARI
         const tabooCards = [
             { target: "SAF ŞİİR", forbidden: ["Şiir", "Dize", "Ahenk"] },
             { target: "TEŞBİH", forbidden: ["Benzetme", "Gibi", "Zayıf"] },
@@ -583,7 +640,6 @@
             document.getElementById('taboo-forbidden').innerText = tabooCards[tabooIdx].forbidden.join(", ");
         }
 
-        // KEHANET
         const fortunes = [
             "🔮 Kehanet: Bugün Merve Hocadan sözlüden 100 alma ihtimalin %99!",
             "🔮 Kehanet: Bugün Akdeniz rüzgarı sana harika edebi fikirler getirecek.",
@@ -598,11 +654,52 @@
             }, 600);
         }
 
-        function votePoll(option) {
-            document.getElementById('poll-result').innerText = "✅ Oyunuz kaydedildi! Seçiminiz harika!";
+        function votePoll(category, name) {
+            document.getElementById('poll-result').innerText = `✅ [Kategori ${category}] OYUNUZ KABUL EDİLDİ: "${name}" seçildi! 🌟`;
         }
 
-        // HIZLI BULMACA
+        // FLASHCARD HAFIZA OYUNU
+        const flashcards = [
+            { front: "Eser: 'Otuz Beş Yaş'\n(Kartı Çevir 🔄)", back: "Yazar: Cahit Sıtkı Tarancı\nTema: Yaşlılık ve Ömür" },
+            { front: "Eser: 'Ben Sana Mecburum'\n(Kartı Çevir 🔄)", back: "Yazar: Attilâ İlhan\nTürü: Lirik Şiir" },
+            { front: "Eser: 'Monna Rosa'\n(Kartı Çevir 🔄)", back: "Yazar: Sezai Karakoç\nAkdemi / İkinci Yeni" }
+        ];
+        let cardIdx = 0;
+        let isFront = true;
+
+        function flipCard() {
+            const fc = document.getElementById('flashcard');
+            if(isFront) {
+                fc.innerText = flashcards[cardIdx].back;
+                fc.style.borderColor = "var(--accent-gold)";
+            } else {
+                fc.innerText = flashcards[cardIdx].front;
+                fc.style.borderColor = "var(--accent-color)";
+            }
+            isFront = !isFront;
+        }
+
+        function nextCard() {
+            cardIdx = (cardIdx + 1) % flashcards.length;
+            isFront = true;
+            const fc = document.getElementById('flashcard');
+            fc.innerText = flashcards[cardIdx].front;
+            fc.style.borderColor = "var(--accent-color)";
+        }
+
+        // BİLMECE
+        function checkRiddle() {
+            const val = document.getElementById('riddle-input').value.toLowerCase().trim();
+            const fb = document.getElementById('riddle-feedback');
+            if(val.includes('kitap') || val.includes('şiir kitabı')) {
+                fb.style.color = "#22c55e";
+                fb.innerText = "🎉 Helal olsun! Doğru bildin: KİTAP!";
+            } else {
+                fb.style.color = "#ef4444";
+                fb.innerText = "❌ Yanlış! İpucu: İçinde sayfalar ve kelimeler var.";
+            }
+        }
+
         const puzzleWords = [
             { scrambled: "RÜZÜBAĞ", normal: "BERGÜZAR", hint: "Hatıra, armağan demek." },
             { scrambled: "BİŞETH", normal: "TEŞBİH", hint: "Benzetme sanatı." }
@@ -658,7 +755,6 @@
             document.getElementById('post-text').value = "";
         }
 
-        // ŞAİR Mİ YAPAY ZEKA MI
         const aiGameQuestions = [
             { text: "Antalya'nın turkuaz dalgaları vurur kıyıya,\n9/B sınıfı kulak verir coşkulu bu duyguya.", type: "ai", exp: "Yapay zeka asistanımız yazdı!" },
             { text: "Ben sana mecburum bilemezsin\nAdını mıh gibi aklımda tutuyorum", type: "sair", exp: "Attilâ İlhan'ın eseridir." }
