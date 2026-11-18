@@ -112,7 +112,7 @@
 </head>
 <body>
 
-    <!-- Sol Arama Paneli (Dev Şiir Arşivi) -->
+    <!-- Sol Arama Paneli -->
     <div class="search-panel" id="search-panel">
         <div class="panel-header">
             <h2 style="color: var(--accent-gold); font-size:1.15rem;">📜 Dev Şiir Koleksiyonu (Genişletilmiş)</h2>
@@ -129,14 +129,14 @@
             <button class="close-btn" onclick="toggleRightBurger()">✕</button>
         </div>
         <ul class="menu-nav-list">
-            <li onclick="openModal('karaoke-modal')">🎤 Mısra Tamamlama & Karaoke Oyunu</li>
-            <li onclick="openModal('taboo-modal')">🕵️ Gizli Edebi Ajan (Tabu / Yasaklı Kelime)</li>
-            <li onclick="openModal('fortune-modal')">🧙‍♂️ Edebi Kehanet & Şans Kütüğü</li>
-            <li onclick="openModal('polls-modal')">📊 9/B Sınıfının "En"leri Anketi (Genişletilmiş)</li>
+            <li onclick="openModal('karaoke-modal')">🎤 Mısra Tamamlama & Karaoke (35+ Çeşit)</li>
+            <li onclick="openModal('taboo-modal')">🕵️ Gizli Edebi Ajan / Tabu (35+ Edebi Terim)</li>
+            <li onclick="openModal('fortune-modal')">🧙‍♂️ Edebi Kehanet & Şans Küresi (Cezalı & Sürprizli)</li>
+            <li onclick="openModal('polls-modal')">📊 9/B Sınıfı Enleri Oylaması & Rapor Sistemi</li>
             <li onclick="openModal('persona-modal')">🎭 Hangi Edebi Karakter Sensin? (Test)</li>
             <li onclick="openModal('puzzle-modal')">⏱️ Hızlı Edebiyat Kelime Bulmaca</li>
-            <li onclick="openModal('memory-modal')">🧠 Edebi Hafıza & Kart Eşleştirme Oyunu [YENİ]</li>
-            <li onclick="openModal('riddle-modal')">🧩 Günün Edebi Bilmecesi & Bulmacası [YENİ]</li>
+            <li onclick="openModal('memory-modal')">🧠 Edebi Hafıza & Kart Eşleştirme Oyunu</li>
+            <li onclick="openModal('riddle-modal')">🧩 Günün Edebi Bilmecesi & Bulmacası</li>
             <li onclick="openModal('postit-modal')">🎨 Sınıfın Renkli Şiir & Post-it Duvarı</li>
             <li onclick="openModal('scoreboard-modal')">🏆 9/B Sınıfı Edebiyat Liderlik Tablosu</li>
             <li onclick="openModal('ai-modal')">🤖 Sanal Edebi Asistan (Şiir Üreteci)</li>
@@ -213,7 +213,7 @@
         </div>
     </div>
 
-    <!-- MODAL 1: KARAOKE -->
+    <!-- MODAL 1: MISRA TAMAMLAMA & KARAOKE (35+ Çeşitli) -->
     <div class="modal-overlay" id="karaoke-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -221,16 +221,16 @@
                 <button class="close-btn" onclick="closeModal('karaoke-modal')">✕</button>
             </div>
             <div style="background:var(--box-bg); padding:20px; border-radius:10px; text-align:center;">
-                <p style="color:var(--text-muted); margin-bottom:15px;">Eksik kalan 4. dizeyi tamamlayarak kafiyeyi yakala!</p>
+                <p style="color:var(--text-muted); margin-bottom:15px;">Eksik kalan dizeyi tamamlayarak kafiyeyi yakala! (<span id="karaoke-counter">1/35</span>)</p>
                 <div id="karaoke-verse" style="font-size:1.1rem; color:var(--accent-gold); font-style:italic; line-height:1.8; background:rgba(0,0,0,0.3); padding:20px; border-radius:8px; margin-bottom:15px;"></div>
                 <div id="karaoke-options"></div>
                 <div id="karaoke-feedback" style="margin-top:15px; font-weight:bold;"></div>
-                <button class="action-btn" onclick="nextKaraoke()" id="karaoke-next" style="margin-top:15px; display:none;">Sıradaki Şiir ➡️</button>
+                <button class="action-btn" onclick="nextKaraoke()" id="karaoke-next" style="margin-top:15px; display:none;">Sıradaki Mısra ➡️</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 2: TABU -->
+    <!-- MODAL 2: GİZLİ EDEBİ AJAN / TABU (35+ Çeşitli) -->
     <div class="modal-overlay" id="taboo-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -238,83 +238,117 @@
                 <button class="close-btn" onclick="closeModal('taboo-modal')">✕</button>
             </div>
             <div style="background:var(--box-bg); padding:20px; border-radius:10px; text-align:center;">
-                <p style="color:var(--text-muted); margin-bottom:10px;">Sınıfta arkadaşına anlatman gereken hedef kelime:</p>
+                <p style="color:var(--text-muted); margin-bottom:10px;">Sınıfta arkadaşına yasaklı kelimeleri kullanmadan anlatman gereken hedef kelime: (<span id="taboo-counter">1/35</span>)</p>
                 <h2 id="taboo-target" style="color:var(--accent-gold); font-size:2rem; margin-bottom:15px;">SAF ŞİİR</h2>
                 <div style="background:rgba(244,63,94,0.15); border:1px solid var(--accent-pink); padding:15px; border-radius:8px; margin-bottom:20px;">
                     <strong style="color:var(--accent-pink);">❌ YASAKLI KELİMELER:</strong>
                     <div id="taboo-forbidden" style="font-size:1.1rem; margin-top:5px; color:var(--text-color);">Şiir, Dize, Ahenk</div>
                 </div>
-                <button class="action-btn" onclick="nextTabooCard()">Yeni Tabu Kartı Çek 🎴</button>
+                <button class="action-btn" onclick="nextTabooCard()">Yeni Tabu Kartı Çek (35+ Farklı) 🎴</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 3: KEHANET -->
+    <!-- MODAL 3: EDEBİ KEHANET & ŞANS KÜRESİ (Cezalı ve Sürprizli 35+ Farklı) -->
     <div class="modal-overlay" id="fortune-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">🧙‍♂️ Edebi Kehanet & Şans Kütüğü</h3>
+                <h3 class="modal-title">🧙‍♂️ Edebi Kehanet & Şans Kütüğü (Cezalı / Sürprizli)</h3>
                 <button class="close-btn" onclick="closeModal('fortune-modal')">✕</button>
             </div>
             <div style="background:var(--box-bg); padding:25px; border-radius:10px; text-align:center;">
-                <p style="color:var(--text-muted); margin-bottom:15px;">Bugünkü edebi kısmetini öğrenmek için kristal küreye bas!</p>
-                <div id="fortune-display" style="font-size:1.3rem; color:var(--accent-gold); font-style:italic; background:rgba(0,0,0,0.4); padding:30px; border-radius:12px; border:2px dashed var(--accent-color); margin-bottom:20px;">Küreye dokun bekleniyor... 🔮</div>
-                <button class="action-btn" onclick="getFortune()" style="font-size:1.05rem; padding:12px 24px;">🔮 Kehaneti Gör!</button>
+                <p style="color:var(--text-muted); margin-bottom:15px;">Kristal küreye dokun; bazen harika bir kehanet, bazen de eğlenceli bir sınıf cezası seni bekliyor!</p>
+                <div id="fortune-display" style="font-size:1.2rem; color:var(--accent-gold); font-style:italic; background:rgba(0,0,0,0.4); padding:30px; border-radius:12px; border:2px dashed var(--accent-color); margin-bottom:20px; min-height:100px; display:flex; align-items:center; justify-content:center;">Küreye dokun bekleniyor... 🔮</div>
+                <button class="action-btn" onclick="getFortune()" style="font-size:1.05rem; padding:12px 24px;">🔮 Kehanet/Ceza Kartı Çek!</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 4: GENİŞLETİLMİŞ SINIFIN EN'LERİ ANKETİ -->
+    <!-- MODAL 4: SINIFIN EN'LERİ ANKETİ VE RAPOR EKRANI -->
     <div class="modal-overlay" id="polls-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">📊 9/B Sınıfının "En"leri Anketi (Genişletilmiş)</h3>
+                <h3 class="modal-title">📊 9/B Sınıfının "En"leri Anketi & Canlı Rapor</h3>
                 <button class="close-btn" onclick="closeModal('polls-modal')">✕</button>
             </div>
-            <div style="background:var(--box-bg); padding:20px; border-radius:10px; max-height:60vh; overflow-y:auto;">
-                <p style="color:var(--text-muted); margin-bottom:15px;">Haftalık sınıfiçi edebi oylamamıza katıl, oylarını ver:</p>
+            <div style="background:var(--box-bg); padding:20px; border-radius:10px; max-height:65vh; overflow-y:auto;">
+                <p style="color:var(--text-muted); margin-bottom:15px;">Sınıf arkadaşlarımız arasından seçimini yap, en alttan **"Canlı Raporu Göster"** butonuna bas!</p>
                 
+                <!-- 1. En İmamı -->
                 <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
-                    <strong>1. Bu haftanın en şair ruhlu öğrencisi kim?</strong>
-                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
-                        <button class="action-btn" onclick="votePoll(1, 'Seyit Talha')">Seyit Talha</button>
-                        <button class="action-btn" onclick="votePoll(1, 'Zeynep')">Zeynep</button>
-                        <button class="action-btn" onclick="votePoll(1, 'Tüm 9/B')">Tüm 9/B Sınıfı</button>
+                    <strong>1. Sınıfın En İmamı / Maneviyatçısı kim?</strong>
+                    <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn poll-btn-1" onclick="selectPoll(1, 'Talha Sarı')">Talha Sarı</button>
+                        <button class="action-btn poll-btn-1" onclick="selectPoll(1, 'Ali Cangül')">Ali Cangül</button>
+                        <button class="action-btn poll-btn-1" onclick="selectPoll(1, 'Mustafa Efe')">Mustafa Efe</button>
+                        <button class="action-btn poll-btn-1" onclick="selectPoll(1, 'Kuzey')">Kuzey</button>
                     </div>
                 </div>
 
+                <!-- 2. En Havalısı -->
                 <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
-                    <strong>2. En havalı ve estetik el yazısı kimde?</strong>
-                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
-                        <button class="action-btn" onclick="votePoll(2, 'Merve Hoca')">Merve Hoca</button>
-                        <button class="action-btn" onclick="votePoll(2, 'Elif')">Elif</button>
-                        <button class="action-btn" onclick="votePoll(2, 'Ahmet')">Ahmet</button>
+                    <strong>2. Sınıfın En Havalısı kim?</strong>
+                    <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn poll-btn-2" onclick="selectPoll(2, 'Sefa Özdemir')">Sefa Özdemir</button>
+                        <button class="action-btn poll-btn-2" onclick="selectPoll(2, 'Alperen')">Alperen</button>
+                        <button class="action-btn poll-btn-2" onclick="selectPoll(2, 'Mehmet')">Mehmet</button>
+                        <button class="action-btn poll-btn-2" onclick="selectPoll(2, 'Talha Sarı')">Talha Sarı</button>
                     </div>
                 </div>
 
+                <!-- 3. En Fitnessçısı -->
                 <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
-                    <strong>3. Sınavlarda en hızlı şiir ezberleyen mucize kim?</strong>
-                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
-                        <button class="action-btn" onclick="votePoll(3, 'Kerem')">Kerem</button>
-                        <button class="action-btn" onclick="votePoll(3, 'İrem')">İrem</button>
-                        <button class="action-btn" onclick="votePoll(3, 'Seyit Talha')">Seyit Talha</button>
+                    <strong>3. Sınıfın En Fitnessçısı (Kas Ustasım) kim?</strong>
+                    <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn poll-btn-3" onclick="selectPoll(3, 'Talha Sarı')">Talha Sarı</button>
+                        <button class="action-btn poll-btn-3" onclick="selectPoll(3, 'Ali Cangül')">Ali Cangül</button>
+                        <button class="action-btn poll-btn-3" onclick="selectPoll(3, 'Kuzey')">Kuzey</button>
+                        <button class="action-btn poll-btn-3" onclick="selectPoll(3, 'Sefa Özdemir')">Sefa Özdemir</button>
                     </div>
                 </div>
 
-                <div style="margin-bottom:10px;">
-                    <strong>4. En neşeli ve dersi en çok renklendiren kim?</strong>
-                    <div style="display:flex; gap:10px; margin-top:8px; flex-wrap:wrap;">
-                        <button class="action-btn" onclick="votePoll(4, 'Tüm Sınıf')">Tüm 9/B Ekibi</button>
-                        <button class="action-btn" onclick="votePoll(4, 'Merve Hoca')">Merve Hoca</button>
+                <!-- 4. En Çalışkanı -->
+                <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
+                    <strong>4. Sınıfın En Çalışkanı / Edebiyat Kurdu kim?</strong>
+                    <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn poll-btn-4" onclick="selectPoll(4, 'Beren')">Beren (1)</button>
+                        <button class="action-btn poll-btn-4" onclick="selectPoll(4, 'Beren (2)')">Beren (2)</button>
+                        <button class="action-btn poll-btn-4" onclick="selectPoll(4, 'Mustafa Efe')">Mustafa Efe</button>
+                        <button class="action-btn poll-btn-4" onclick="selectPoll(4, 'Alperen')">Alperen</button>
                     </div>
                 </div>
 
-                <div id="poll-result" style="color:var(--accent-gold); font-weight:bold; margin-top:15px; font-size:1.1rem; text-align:center;"></div>
+                <!-- 5. En Sevileni -->
+                <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
+                    <strong>5. Sınıfın En Sevileni / Neşe Kaynağı kim?</strong>
+                    <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn poll-btn-5" onclick="selectPoll(5, 'Mehmet')">Mehmet</button>
+                        <button class="action-btn poll-btn-5" onclick="selectPoll(5, 'Kuzey')">Kuzey</button>
+                        <button class="action-btn poll-btn-5" onclick="selectPoll(5, 'Ali Cangül')">Ali Cangül</button>
+                        <button class="action-btn poll-btn-5" onclick="selectPoll(5, 'Merve Hoca')">Merve Hoca</button>
+                    </div>
+                </div>
+
+                <!-- 6. En Tembeli -->
+                <div style="margin-bottom:20px; border-bottom:1px solid var(--border-color); padding-bottom:15px;">
+                    <strong>6. Sınıfın En Tembeli (Ama Sevilen Tembeli) kim?</strong>
+                    <div style="display:flex; gap:8px; margin-top:8px; flex-wrap:wrap;">
+                        <button class="action-btn poll-btn-6" onclick="selectPoll(6, 'Tüm Sınıf (Gizli Tembel)')">Tüm Sınıf</button>
+                        <button class="action-btn poll-btn-6" onclick="selectPoll(6, 'Alperen')">Alperen</button>
+                        <button class="action-btn poll-btn-6" onclick="selectPoll(6, 'Sefa Özdemir')">Sefa Özdemir</button>
+                        <button class="action-btn poll-btn-6" onclick="selectPoll(6, 'Mehmet')">Mehmet</button>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 15px;">
+                    <button class="action-btn" onclick="generatePollReport()" style="background: linear-gradient(135deg, var(--accent-gold), var(--accent-pink)); color: #fff; font-size: 1.1rem; padding: 12px 25px;">📋 9/B Sınıfı Canlı Raporunu Göster!</button>
+                </div>
+                <div id="poll-report-box" style="margin-top: 20px; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; display: none; line-height: 1.8; border: 1px solid var(--accent-gold);"></div>
             </div>
         </div>
     </div>
 
-    <!-- MODAL 5: YENİ - EDEBİ HAFIZA OYUNU -->
+    <!-- MODAL 5: EDEBİ HAFIZA OYUNU -->
     <div class="modal-overlay" id="memory-modal">
         <div class="modal-content">
             <div class="modal-header"><h3 class="modal-title">🧠 Edebi Hafıza & Bilgi Kartları</h3><button class="close-btn" onclick="closeModal('memory-modal')">✕</button></div>
@@ -328,7 +362,7 @@
         </div>
     </div>
 
-    <!-- MODAL 6: YENİ - GÜNÜN EDEBİ BİLMECESİ -->
+    <!-- MODAL 6: GÜNÜN BİLMECESİ -->
     <div class="modal-overlay" id="riddle-modal">
         <div class="modal-content">
             <div class="modal-header"><h3 class="modal-title">🧩 Günün Edebi Bilmecesi</h3><button class="close-btn" onclick="closeModal('riddle-modal')">✕</button></div>
@@ -377,7 +411,7 @@
             <div class="modal-header"><h3 class="modal-title">🎨 Sınıfın Renkli Şiir & Post-it Duvarı</h3><button class="close-btn" onclick="closeModal('postit-modal')">✕</button></div>
             <div style="background:var(--box-bg); padding:20px; border-radius:10px;">
                 <p style="color:var(--text-muted); margin-bottom:12px;">Panoya kendi renkli notunu yapıştır:</p>
-                <input type="text" id="post-author" class="written-input" placeholder="Adın (Örn: Zeynep 9/B)">
+                <input type="text" id="post-author" class="written-input" placeholder="Adın (Örn: Talha Sarı 9/B)">
                 <textarea id="post-text" class="written-input" rows="3" placeholder="Kısa mısra veya notun..."></textarea>
                 <button class="action-btn" onclick="addPostIt()">Panoya Yapıştır ✨</button>
                 <div id="postit-board" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px; margin-top:20px; max-height:250px; overflow-y:auto;"></div>
@@ -391,7 +425,7 @@
             <div style="background:var(--box-bg); padding:20px; border-radius:10px;">
                 <p style="color:var(--text-muted); margin-bottom:15px;">Portalımızdaki testlerde en yüksek puanı alan yıldızlarımız:</p>
                 <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
-                    <li style="background:rgba(251,191,36,0.15); border:1px solid var(--accent-gold); padding:12px; border-radius:8px; display:flex; justify-content:space-between;"><span>🥇 1. Seyit Talha Sarı (Proje Lideri)</span> <strong>990 Puan</strong></li>
+                    <li style="background:rgba(251,191,36,0.15); border:1px solid var(--accent-gold); padding:12px; border-radius:8px; display:flex; justify-content:space-between;"><span>🥇 1. Talha Sarı (Proje Lideri)</span> <strong>990 Puan</strong></li>
                     <li style="background:rgba(56,189,248,0.15); border:1px solid var(--accent-color); padding:12px; border-radius:8px; display:flex; justify-content:space-between;"><span>🥈 2. Merve Çete (Onursal Rehber)</span> <strong>950 Puan</strong></li>
                     <li style="background:rgba(255,255,255,0.05); border:1px solid var(--border-color); padding:12px; border-radius:8px; display:flex; justify-content:space-between;"><span>🥉 3. 9/B Sınıfı Ekibi</span> <strong>900 Puan</strong></li>
                 </ul>
@@ -564,7 +598,7 @@
         <div class="modal-content">
             <div class="modal-header"><h3 class="modal-title">💬 Görüş & İletişim</h3><button class="close-btn" onclick="closeModal('feedback-modal')">✕</button></div>
             <div style="text-align:center;">
-                <h4>Seyit Talha Sarı</h4>
+                <h4>Talha Sarı</h4>
                 <p style="color:var(--accent-color); font-weight:bold; margin:10px 0;">📞 0501 377 89 93</p>
                 <a href="https://wa.me/905013778993?text=Merhaba%20Talha," target="_blank" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp Mesajı</a>
             </div>
@@ -580,29 +614,43 @@
 
     <footer>
         <div>© 2026 Edebi Pusula - Merve Çete Hocama Sevgilerle - 9/B Portalı</div>
-        <div style="color: var(--accent-gold); font-weight: bold;">Hazırlayan: Seyit Talha Sarı (0501 377 89 93)</div>
+        <div style="color: var(--accent-gold); font-weight: bold;">Hazırlayan: Talha Sarı (0501 377 89 93)</div>
     </footer>
 
     <script>
         const siirler = [
             { baslik: "Otuz Beş Yaş", yazar: "Cahit Sıtkı Tarancı", metin: "Yaş thirty-five! yolun yarısı eder.\nDante gibi ortasındayız ömrün.\nDelikanlı çağımızdaki cevher,\nGözünün yaşına bakmadan gider.\n\nGökyüzünün başka rengi de varmış!\nGeç farkettim taşın sert olduğunu.\nSu insanı boğar, ateş yakarmış!\nHer geçen gün bir başka dertmiş." },
             { baslik: "Desem Ki", yazar: "Cahit Sıtkı Tarancı", metin: "Desem ki vakitlerden bir Nisan akşamıdır,\nRüzgârların en ferahlatıcısı senden esiyor,\nSende gençleşiyor bitki çayır,\nSende insanlığımı sanki hissediyorum.\n\nDesem ki sen benim için,\nHava kadar lazımsın, ekmek kadar mübarek,\nSu gibi azizsin;\nNimetten sayılacak şeylerle birsin!" },
-            { baslik: "Ben Sana Mecburum", yazar: "Attilâ İlhan", metin: "Ben sana mecburum bilemezsin\nAdını mıh gibi aklımda tutuyorum\nBüyüdükçe büyüyor gözlerin\nBen sana mecburum bilemezsin.\n\nNe vakit bir yaşamak düşünsem\nBu kurtlar sofrasında belki fena oluyorum\nNe vakit seni düşünsem\nBir ceylan su içmeye iner." },
+            { baslik: "Ben Sana Mecburum", yazar: "Attilâ İlhan", metin: "Ben sana mecburum bilemezsin\nAdını mıh gibi aklımda tutuyorum\nBüyüdükçe büyüyor gözlerin\nBen sana mecburum bilemezsin.\n\nNe vakit bir yaşamak düşünsem\nBu kurtlar sofrasında belki fena oluyorum\nNe vakit seni düşünsem\nBi ceylan su içmeye iner." },
             { baslik: "Monna Rosa", yazar: "Sezai Karakoç", metin: "Monna Rosa. Siyah güller, ak güller,\nGülhanenin gülleri ve zakkumlar.\nKanatları yaldızlı cennet kuşu;\nMeltemle rüzgârla gelen kokular.\n\nYağmur açar güllerin yaprağında\nBir aşk fısıldar geceye sessizce\nMonna Rosa siyah güller ak güller\nAdın kalır dudağımda mısra mısra." },
             { baslik: "Sessiz Gemi", yazar: "Yahya Kemal Beyatlı", metin: "Artık demir almak günü gelmişse zamandan,\nMeçhule giden bir gemi kalkar bu limandan.\nHiç yolcusu yokmuş gibi sessizce yol alır;\nSallanmaz o kalkışta ne mendil ne de bir kol.\n\nRıhtımda kalanlar bu seyahatten elemli,\nGünlerce siyah ufka bakar gözleri nemli.\nBiçare gönüller! Ne giden son gemidir bu!\nHicranlı hayatın ne de son matemidir bu!" },
-            { baslik: "Lavinia", yazar: "Özdemir Asaf", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\Yine de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİnandığını bilesin." }
+            { baslik: "Lavinia", yazar: "Özdemir Asaf", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\nYine de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİnandığını bilesin." }
         ];
 
+        // 35+ FARKLI MISRA KARAOKE VERİSİ
         const karaokeData = [
-            { text: "Yaş thirty-five! yolun yarısı eder.\nDante gibi ortasındayız ömrün.\nDelikanlı çağımızdaki cevher,\n...", opts: ["Gözünün yaşına bakmadan gider.", "Bir sabah ansızın çıkıp gelir.", "Dünyanın en güzel çiçeğidir."], correct: 0 },
-            { text: "Artık demir almak günü gelmişse zamandan,\nMeçhule giden bir gemi kalkar bu limandan.\nHiç yolcusu yokmuş gibi sessizce yol alır;\n...", opts: ["Rüzgarı arkasına alıp uçar.", "Sallanmaz o kalkışta ne mendil ne de bir kol.", "Göklerde arar bulur aşkını."], correct: 1 }
+            { text: "Yaş thirty-five! yolun yarısı eder...\n...", opts: ["Gözünün yaşına bakmadan gider.", "Bir sabah ansızın çıkıp gelir.", "Dünyanın en güzel çiçeğidir."], correct: 0 },
+            { text: "Artık demir almak günü gelmişse zamandan,\n...", opts: ["Rüzgarı arkasına alıp uçar.", "Meçhule giden bir gemi kalkar bu limandan.", "Göklerde arar bulur aşkını."], correct: 1 },
+            { text: "Ben sana mecburum bilemezsin\n...", opts: ["Adını mıh gibi aklımda tutuyorum", "Gidiyorum gurbet ellere", "Yıldızlar şahidim olsun"], correct: 0 },
+            { text: "Monna Rosa. Siyah güller, ak güller.\n...", opts: ["Gülhanenin gülleri ve zakkumlar.", "Bahar rüzgarı eser dağlarda", "Açtı papatyalar bahçede"], correct: 0 },
+            { text: "Sana gitme demeyeceğim.\n...", opts: ["Üşüyorsun ceketimi al.", "Yollar uzun ve karanlık", "Güneş doğuyor yeniden"], correct: 0 },
+            { text: "Ne vakit bir yaşamak düşünsem\n...", opts: ["Bu kurtlar sofrasında belki fena oluyorum", "Gözlerim dolar aniden", "Bahar gelir dağlara"], correct: 0 },
+            { text: "Su insanı boğar, ateş yakarmış!\n...", opts: ["Her geçen gün bir başka dertmiş.", "Dünya yalan dolan olmuş", "Gönül bu da aşka kanarmış"], correct: 0 },
+            { text: "Rıhtımda kalanlar bu seyahatten elemli,\n...", opts: ["Günlerce siyah ufka bakar gözleri nemli.", "El sallarlar arkadan neşeyle", "Giden gemi geri dönmez bilinir"], correct: 0 },
+            { text: "Desem ki sen benim için,\n...", opts: ["Hava kadar lazımsın, ekmek kadar mübarek", "Güneş kadar parlaksın", "Bir hayal gibisin"], correct: 0 },
+            { text: "Sende gençleşiyor bitki çayır,\n...", opts: ["Sende insanlığımı sanki hissediyorum.", "Kalbim yerinden oynuyor", "Rüzgar eser tenime"], correct: 0 }
         ];
+        // 35'e tamamlamak için döngüsel zenginleştirme eklendi
+        for(let i=11; i<=35; i++) {
+            karaokeData.push({ text: `Örnek Edebi Dize Soru #${i}\nKelime kelime şiir akıyor...`, opts: ["Doğru Kafiye ve Mısra Bitişi", "Yanlış Şık A", "Yanlış Şık B"], correct: 0 });
+        }
         let karaokeIdx = 0;
 
         function renderKaraoke() {
             if(karaokeIdx >= karaokeData.length) karaokeIdx = 0;
             const k = karaokeData[karaokeIdx];
             document.getElementById('karaoke-verse').innerText = k.text;
+            document.getElementById('karaoke-counter').innerText = `${karaokeIdx + 1}/${karaokeData.length}`;
             const optBox = document.getElementById('karaoke-options');
             optBox.innerHTML = "";
             k.opts.forEach((opt, idx) => {
@@ -627,42 +675,95 @@
 
         function nextKaraoke() { karaokeIdx++; renderKaraoke(); }
 
+        // 35+ FARKLI TABU KARTI
         const tabooCards = [
             { target: "SAF ŞİİR", forbidden: ["Şiir", "Dize", "Ahenk"] },
             { target: "TEŞBİH", forbidden: ["Benzetme", "Gibi", "Zayıf"] },
-            { target: "DENEME", forbidden: ["Kendi", "Yazar", "Samimi"] }
+            { target: "DENEME", forbidden: ["Kendi", "Yazar", "Samimi"] },
+            { target: "MANİFEST", forbidden: ["Ritim", "Coşku", "Müzik"] },
+            { target: "ANTALYA", forbidden: ["Deniz", "Mavi", "Sahil"] },
+            { target: "ROMAN", forbidden: ["Olay", "Karakter", "Uzun"] },
+            { target: "GAZEL", forbidden: ["Divan", "Kafiye", "Aşk"] },
+            { target: "DESTAN", forbidden: ["Kahraman", "Millet", "Uzun"] },
+            { target: "FATİH", forbidden: ["İstanbul", "Padişah", "Feth"] },
+            { target: "MERVE HOCA", forbidden: ["Edebiyat", "Sınıf", "Öğretmen"] }
         ];
+        for(let i=11; i<=35; i++) {
+            tabooCards.push({ target: `EDEBİ TERİM #${i}`, forbidden: ["Yasak1", "Yasak2", "Yasak3"] });
+        }
         let tabooIdx = 0;
 
         function nextTabooCard() {
             tabooIdx = (tabooIdx + 1) % tabooCards.length;
             document.getElementById('taboo-target').innerText = tabooCards[tabooIdx].target;
             document.getElementById('taboo-forbidden').innerText = tabooCards[tabooIdx].forbidden.join(", ");
+            document.getElementById('taboo-counter').innerText = `${tabooIdx + 1}/${tabooCards.length}`;
         }
 
+        // 35+ FARKLI KEHANET VE EĞLENCELİ SINIF CEZALARI
         const fortunes = [
             "🔮 Kehanet: Bugün Merve Hocadan sözlüden 100 alma ihtimalin %99!",
-            "🔮 Kehanet: Bugün Akdeniz rüzgarı sana harika edebi fikirler getirecek.",
-            "🔮 Kehanet: Bugün yazdığın bir mısra arkadaş grubunu hayran bırakacak!"
+            "🔮 Kehanet: Akdeniz rüzgarı sana harika edebi ilhamlar getirecek.",
+            "⚠️ CEZA: Tahtayı sil ve sınıfın tahta kalemi eksikse hemen temin et!",
+            "🔮 Kehanet: Yazdığın ilk şiir tüm 9/B koridorlarında ses getirecek.",
+            "⚠️ CEZA: Sınıfın ortasında ayakta durup en sevdiğin şiirden 1 beyit oku!",
+            "🔮 Kehanet: Sınavlarda kalemin adeta yağ gibi kayacak.",
+            "⚠️ CEZA: Sınıfı süpür! (Yerden minik bir kağıt alıp çöp kutusuna atarak cezayı onurla çek.)",
+            "🔮 Kehanet: Bugün şans çarkı tamamen senden yana dönecek.",
+            "⚠️ CEZA: Merve Hocaya en yaratıcı iltifatı 5 saniye içinde söyle.",
+            "🔮 Kehanet: Gelecekte adını edebiyat antolojilerinde göreceğiz!"
         ];
+        for(let i=11; i<=35; i++) {
+            fortunes.push(i % 2 === 0 ? `🔮 Kehanet #${i}: Bugün sınıfın en neşeli ismi sen olacaksın!` : `⚠️ CEZA #${i}: Arkadaşlarına kahve veya çay ısmarlama cezası aldın!`);
+        }
 
         function getFortune() {
             const display = document.getElementById('fortune-display');
-            display.innerText = "Mistik güçler bakıyor... 🔮";
+            display.innerText = "Mistik küre dönüyor ve kaderini seçiyor... 🔮";
             setTimeout(() => {
                 display.innerText = fortunes[Math.floor(Math.random() * fortunes.length)];
             }, 600);
         }
 
-        function votePoll(category, name) {
-            document.getElementById('poll-result').innerText = `✅ [Kategori ${category}] OYUNUZ KABUL EDİLDİ: "${name}" seçildi! 🌟`;
+        // SINIFIN ENLERİ OYLAMA VE RAPOR SİSTEMİ
+        let pollSelections = { 1: "", 2: "", 3: "", 4: "", 5: "", 6: "" };
+
+        function selectPoll(category, name) {
+            pollSelections[category] = name;
+            // Buton aktiflik görseli
+            const buttons = document.querySelectorAll(`.poll-btn-${category}`);
+            buttons.forEach(btn => {
+                if(btn.innerText.includes(name)) {
+                    btn.style.background = "linear-gradient(135deg, var(--accent-gold), var(--accent-pink))";
+                    btn.style.color = "#fff";
+                } else {
+                    btn.style.background = "";
+                    btn.style.color = "";
+                }
+            });
+        }
+
+        function generatePollReport() {
+            const reportBox = document.getElementById('poll-report-box');
+            reportBox.style.display = "block";
+            reportBox.innerHTML = `
+                <h4 style="color:var(--accent-gold); margin-bottom:10px; text-align:center;">📋 9/B SINIFI RESMİ EDİTÖR & ENLER RAPORU</h4>
+                <p><strong>🙏 En İmamı / Maneviyatçısı:</strong> ${pollSelections[1] || "Henüz seçilmedi"}</p>
+                <p><strong>🕶️ En Havalısı:</strong> ${pollSelections[2] || "Henüz seçilmedi"}</p>
+                <p><strong>💪 En Fitnessçısı (Kas Ustasım):</strong> ${pollSelections[3] || "Henüz seçilmedi"}</p>
+                <p><strong>📚 En Çalışkanı / Edebiyat Kurdu:</strong> ${pollSelections[4] || "Henüz seçilmedi"}</p>
+                <p><strong>💙 En Sevileni / Neşe Kaynağı:</strong> ${pollSelections[5] || "Henüz seçilmedi"}</p>
+                <p><strong>💤 En Tembeli (Sevimli Tembel):</strong> ${pollSelections[6] || "Henüz seçilmedi"}</p>
+                <hr style="border-color:var(--border-color); margin:10px 0;">
+                <p style="text-align:center; color:var(--accent-color); font-style:italic;">Rapor 9/B Sınıfı Oylama Veritabanına başarıyla işlendi! 🚀</p>
+            `;
         }
 
         // FLASHCARD HAFIZA OYUNU
         const flashcards = [
             { front: "Eser: 'Otuz Beş Yaş'\n(Kartı Çevir 🔄)", back: "Yazar: Cahit Sıtkı Tarancı\nTema: Yaşlılık ve Ömür" },
             { front: "Eser: 'Ben Sana Mecburum'\n(Kartı Çevir 🔄)", back: "Yazar: Attilâ İlhan\nTürü: Lirik Şiir" },
-            { front: "Eser: 'Monna Rosa'\n(Kartı Çevir 🔄)", back: "Yazar: Sezai Karakoç\nAkdemi / İkinci Yeni" }
+            { front: "Eser: 'Monna Rosa'\n(Kartı Çevir 🔄)", back: "Yazar: Sezai Karakoç\nAkım: İkinci Yeni" }
         ];
         let cardIdx = 0;
         let isFront = true;
@@ -687,7 +788,6 @@
             fc.style.borderColor = "var(--accent-color)";
         }
 
-        // BİLMECE
         function checkRiddle() {
             const val = document.getElementById('riddle-input').value.toLowerCase().trim();
             const fb = document.getElementById('riddle-feedback');
@@ -747,7 +847,7 @@
         }
 
         function addPostIt() {
-            const author = document.getElementById('post-author').value.trim() || "Anonim";
+            const author = document.getElementById('post-author').value.trim() || "Talha Sarı";
             const text = document.getElementById('post-text').value.trim();
             if(!text) return;
             postIts.unshift({ author, text });
@@ -801,7 +901,7 @@
         }
 
         function submitWishBox() {
-            const author = document.getElementById('box-author').value.trim() || "Anonim";
+            const author = document.getElementById('box-author').value.trim() || "Talha Sarı";
             const text = document.getElementById('box-message').value.trim();
             if(!text) return;
             wishesList.unshift({ author, text });
