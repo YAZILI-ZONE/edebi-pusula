@@ -71,7 +71,7 @@
                 <input type="text" id="siirAra" onkeyup="siirFiltrele()" placeholder="Şiir veya Şair İsmi..." class="w-full bg-[#0d1838] border border-blue-900/60 rounded-xl px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-amber-400 mb-3">
                 
                 <div id="siirListesi" class="space-y-1 flex-grow overflow-y-auto custom-scroll pr-1 text-xs">
-                    <!-- JS ile 40 şiir yüklenecek -->
+                    <!-- JS ile dinamik yüklenecek -->
                 </div>
 
                 <div class="pt-3 mt-3 border-t border-blue-900/30 text-center">
@@ -86,7 +86,7 @@
 
         <!-- ORTA SAHNE -->
         <main id="ortaSahne" class="flex-grow p-4 sm:p-8 flex flex-col items-center justify-start relative overflow-y-auto custom-scroll">
-            <!-- JS ile aktif şiir veya seçilen modül yüklenecek -->
+            <!-- Dinamik içerik -->
         </main>
 
         <!-- SAĞ SABİT BİLGİ PANELİ -->
@@ -94,7 +94,7 @@
             <div class="space-y-3">
                 <div class="bg-[#0e193b] border border-blue-900/50 p-4 rounded-2xl">
                     <h4 class="text-xs font-bold text-amber-300 flex items-center gap-1.5 mb-1.5">🌙 Günün Sözü</h4>
-                    <p id="gununSozuMetin" class="text-xs text-slate-300 italic leading-relaxed">"Edebiyat, insanın insanı en güzel anlatma sanatıdır."</p>
+                    <p class="text-xs text-slate-300 italic leading-relaxed">"Edebiyat, insanın insanı en güzel anlatma sanatıdır."</p>
                 </div>
 
                 <div class="bg-[#0e193b] border border-blue-900/50 p-4 rounded-2xl">
@@ -185,7 +185,7 @@
         <p class="text-amber-400 font-bold mt-1 sm:mt-0">Hazırlayan: Seyit Talha Sarı</p>
     </footer>
 
-    <!-- JAVASCRIPT: 40 ORİJİNAL ŞİİR + TÜM MODÜLLER -->
+    <!-- JAVASCRIPT: TÜM MODÜLLER VE 40 ŞİİR TAM ÇALIŞIR VERSİYON -->
     <script>
         const siirler = [
             { baslik: "Otuz Beş Yaş", sair: "Cahit Sıtkı Tarancı", donem: "Saf Şiir", metin: "Yaş otuz beş! yolun yarısı eder.\nDante gibi ortasındayız ömrün.\nDelikanlı çağımızdaki cevher,\nGözünün yaşına bakmadan gider.\n\nGökyüzünün başka rengi de varmış!\nGeç farkettim taşın sert olduğunu.\nSu insanı boğar, ateş yakarmış!\nHer geçen gün bir başka dertmiş.\n\nAyva sarı nar kırmızı sonbahar!\nHer yıl biraz daha benimsediğim.\nNe dönüp duruyor havada kuşlar?\nNerden çıktı bu cenaze? ölen kim?" },
@@ -195,7 +195,7 @@
             { baslik: "Sessiz Gemi", sair: "Yahya Kemal Beyatlı", donem: "Saf Şiir", metin: "Artık demir almak günü gelmişse zamandan,\nMeçhule giden bir gemi kalkar bu limandan.\nHiç yolcusu yokmuş gibi sessizce alır yol;\nSallanmaz o kalkışta ne mendil ne de bir kol.\n\nBiçare gönüller! Ne giden son gemidir bu!\nHicranlı hayatın ne de son matemidir bu!\nDünyada sevilmiş ve seven nafile bekler;\nBilmez ki giden sevgililer dönmeyecekler." },
             { baslik: "Lavinia", sair: "Özdemir Asaf", donem: "Cumhuriyet Dönemi", metin: "Sana gitme demeyeceğim.\nÜşüyorsun ceketimi al.\nGünün en güzel saatleri bunlar.\nYanımda kal.\n\nSana gitme demeyeceğim.\nGene de sen bilirsin.\nYalanlar istiyorsan yalanlar söyleyeyim,\nİncinirsin.\n\nSana gitme demeyeceğim,\nAma gitme, Lavinia.\nAdını gizleyeceğim\nSen de bilme, Lavinia." },
             { baslik: "Kaldırımlar", sair: "Necip Fazıl Kısakürek", donem: "Mistik Şiir", metin: "Sokaktayım, kimsesiz bir sokak ortasında;\nYürüyorum, arkama bakmadan yürüyorum.\nYolumun karanlığa saplanan noktasında,\nSanki beni bekleyen bir hayal görüyorum.\n\nKara gökler kül rengi bulutlarla kapanık;\nEvlerin bacasını kolluyor yıldırımlar.\nİn cin uykuda, yalnız iki yoldaş uyanık;\nBiri benim, biri de serseri kaldırımlar." },
-            { baslik: "Anlatamıyorum", sair: "Orhan Veli Kanık", donem: "Garip Akımı", metin: "Ağlasam sesimi duyar mısınız,\nMısralarımda;\nDokunabilir misiniz,\nGözyaşlarıma ellerinizle?\n\nBilmezdim şarkıların bu kadar güzel,\nKelimelerinse kifayetsiz olduğunu\nBu derde düşmeden önce.\n\nBir yer var, biliyorum;\nHer şeyi söylemek mümkün;\nEpeyce yaklaşmışım, duyuyorum;\nAnlatamıyorum." },
+            { baslik: "Anlatamıyorum", sair: "Orhan Veli Kanık", donem: "Garip Akımı", metin: "Ağlasam sesimi duyar mısınız,\nMısralarımda;\nDokunabilir misiniz,\Gözyaşlarıma ellerinizle?\n\nBilmezdim şarkıların bu kadar güzel,\nKelimelerinse kifayetsiz olduğunu\nBu derde düşmeden önce.\n\nBir yer var, biliyorum;\nHer şeyi söylemek mümkün;\nEpeyce yaklaşmışım, duyuyorum;\nAnlatamıyorum." },
             { baslik: "Mihriban", sair: "Abdurrahim Karakoç", donem: "Halk Şiiri", metin: "Sarı saçlarına deli gönlümü\nBağlamışım, çözülmüyor Mihriban!\nAyrılıktan zor belleme ölümü\nGörmeyince sezilmiyor Mihriban!\n\nYar deyince kalem elden düşüyor\nGözlerim görmüyor aklım şaşıyor\nLambada titreyen alev üşüyor\nAşk kağıda yazılmıyor Mihriban!" },
             { baslik: "Göğe Bakma Durağı", sair: "Turgut Uyar", donem: "İkinci Yeni", metin: "İkimiz birden sevinebiliriz göğe bakalım\nŞu kaçamak ışıklardan şu şeker kamışlarından\nBebe dişlerinden güneşlerden yanan otlardan\nDurmadan harcadığım şu gözlerimi al kurtar\nŞu aranıp duran korkak ellerimi tut\nBu evleri atla bu evleri de bunları da\nGöğe bakalım." },
             { baslik: "Bursa'da Zaman", sair: "Ahmet Hamdi Tanpınar", donem: "Saf Şiir", metin: "Bursa'da bir eski cami avlusu,\nKüçük şadırvanda şırıldayan su;\nOrhan zamanından kalma bir duvar...\nOnunla bir yaşta ihtiyar çınar\nEliyor dört yana sakin bir günü.\nBir rüyadan arta kalmanın hüznü\nİçinde gülüyor bana derinden." },
@@ -213,7 +213,7 @@
             { baslik: "Merdiven", sair: "Ahmet Haşim", donem: "Fecriati", metin: "Ağır, ağır çıkacaksın bu merdivenlerden,\nEteklerinde güneş rengi bir yığın yaprak,\nVe bir zaman bakacaksın semaya ağlayarak...\nSular sarardı... Yüzün perde perde solmakta,\nKızıl havaları seyret ki akşam olmakta..." },
             { baslik: "Han Duvarları", sair: "Faruk Nafiz Çamlıbel", donem: "Beş Hececiler", metin: "Yağız atlar kişnedi, meşin kırbaç şakladı,\nBir dakika araba yerinde durakladı.\nNeden sonra sarsıldı altımda demir yaylar,\nGözlerimin önünden geçti kervansaraylar..." },
             { baslik: "Aşk İki Kişiliktir", sair: "Ataol Behramoğlu", donem: "Toplumcu Şiir", metin: "Değişir yönü rüzgarın\nSolur aniden yapraklar\nŞaşırır yolunu denizde gemi\nBoşuna bir liman arar\nGülüşü bir yabancının\nÇalmıştır senden sevdiğini." },
-            { baslik: "Üçüncü Şahsın Şiiri", sair: "Attilâ İlhan", donem: "Mavi Hareketi", metin: "Gözlerin gözlerime değince\nFelâketim olurdu ağlardım\nBeni sevmiyordun bilirdim\nBir sevdiğin vardı duyardım\nÇöp gibi bir oğlan ipince\Hayırsızın biriydi fikrimce" },
+            { baslik: "Üçüncü Şahsın Şiiri", sair: "Attilâ İlhan", donem: "Mavi Hareketi", metin: "Gözlerin gözlerime değince\nFelâketim olurdu ağlardım\nBeni sevmiyordun bilirdim\nBir sevdiğin vardı duyardım\nÇöp gibi bir oğlan ipince\nHayırsızın biriydi fikrimce" },
             { baslik: "Sürgün Ülkeden Başkentler Başkentine", sair: "Sezai Karakoç", donem: "İkinci Yeni", metin: "Senin kalbinden sürgün oldum ilkin\nBütün sürgünlüklerim bir bakıma bu sürgünün bir süreği\nBütün törenlerin şölenlerin ayinlerin yortuların dışında\nSana geldim ayaklarına kapanmaya geldim" },
             { baslik: "Üvercinka", sair: "Cemal Süreya", donem: "İkinci Yeni", metin: "Böylece bir kere daha boynunlayız sayılı yerlerinden\nEn uzun boynun bu senin dayanmaya ya da umudu kesmemeye\nLaleli'den dünyaya doğru giden bir tramvaydayız\nBirden nasıl oluyor sen yüreğimi elliyorsun" },
             { baslik: "Yerçekimli Karanfil", sair: "Edip Cansever", donem: "İkinci Yeni", metin: "Biliyor musun az az yaşıyorsun içimde\nOysaki seninle güzel olmak var\nÖrneğin rakı içiyoruz, içimize bir karanfil düşüyor gibi\nBir ağaç işliyor tıkır tıkır yanımızda\nMidemdi aklımdı şu kadarcık kalıyor." },
@@ -236,6 +236,7 @@
 
         function siirListesiniCiz(liste) {
             const kutu = document.getElementById('siirListesi');
+            if(!kutu) return;
             document.getElementById('siirSayac').innerText = liste.length;
             kutu.innerHTML = liste.map((s) => {
                 const gercekIdx = siirler.indexOf(s);
@@ -251,7 +252,9 @@
         }
 
         function siirFiltrele() {
-            const q = document.getElementById('siirAra').value.toLowerCase();
+            const input = document.getElementById('siirAra');
+            if(!input) return;
+            const q = input.value.toLowerCase();
             const filtreli = siirler.filter(s => 
                 s.baslik.toLowerCase().includes(q) || 
                 s.sair.toLowerCase().includes(q) || 
@@ -262,9 +265,8 @@
 
         function anaEkranaDon() {
             siirGoster(aktifSiirIdx);
-            if(window.innerWidth < 768) {
-                document.getElementById('rightSidebar').classList.add('translate-x-full');
-            }
+            document.getElementById('rightSidebar').classList.add('translate-x-full');
+            document.getElementById('leftSidebar').classList.add('-translate-x-full');
         }
 
         function siirGoster(idx) {
@@ -300,6 +302,7 @@
                 </div>
             `;
             document.getElementById('leftSidebar').classList.add('-translate-x-full');
+            document.getElementById('rightSidebar').classList.add('translate-x-full');
         }
 
         function rastgeleSiir() {
@@ -348,8 +351,10 @@
         function toggleSidebar(side) {
             if (side === 'left') {
                 document.getElementById('leftSidebar').classList.toggle('-translate-x-full');
+                document.getElementById('rightSidebar').classList.add('translate-x-full');
             } else {
                 document.getElementById('rightSidebar').classList.toggle('translate-x-full');
+                document.getElementById('leftSidebar').classList.add('-translate-x-full');
             }
         }
 
@@ -425,6 +430,7 @@
             window.speechSynthesis.cancel();
             okumaDurumu = false;
             document.getElementById('rightSidebar').classList.add('translate-x-full');
+            document.getElementById('leftSidebar').classList.add('-translate-x-full');
             const sahne = document.getElementById('ortaSahne');
 
             if (tip === 'deneme') {
@@ -670,13 +676,15 @@
         }
 
         function siirUret() {
-            const konu = document.getElementById('aiKonu').value.trim() || "Edebiyat";
+            const konuInput = document.getElementById('aiKonu');
+            const konu = konuInput ? (konuInput.value.trim() || "Edebiyat") : "Edebiyat";
             const sablonlar = [
                 `Bir rüzgâr eser şimdi ${konu} üstüne,\nGönlümde açar çiçekler her mevsim yine,\nKelimeler dans eder mısraların içinde,\nSonsuz bir iz bırakır 9/B kalbinde.`,
                 `Gecenin sessizliğinde saklıdır ${konu},\nBir şairin kaleminden dökülür umudu,\nOkudukça aydınlanır insanın ufku,\nEdebi Pusula'dır yolumuzun ışığı.`
             ];
             const secilen = sablonlar[Math.floor(Math.random() * sablonlar.length)];
-            document.getElementById('aiSonuc').innerHTML = `<p>${secilen.replace(/\n/g, '<br>')}</p>`;
+            const sonucDiv = document.getElementById('aiSonuc');
+            if(sonucDiv) sonucDiv.innerHTML = `<p>${secilen.replace(/\n/g, '<br>')}</p>`;
         }
 
         const oyunVerileri = [
@@ -689,7 +697,8 @@
 
         function oyunYeniTur() {
             aktifOyun = oyunVerileri[Math.floor(Math.random() * oyunVerileri.length)];
-            document.getElementById('ortaSahne').innerHTML = `
+            const sahne = document.getElementById('ortaSahne');
+            sahne.innerHTML = `
                 <div class="w-full max-w-2xl bg-[#0e193b] border border-blue-800/50 rounded-3xl p-8 text-center shadow-2xl animate-fade my-auto">
                     <h2 class="text-2xl font-bold text-amber-300 mb-2">🎮 Şair mi? Yapay Zeka mı?</h2>
                     <p class="text-xs text-slate-400 mb-6">Aşağıdaki dizeleri ünlü bir şair mi yazdı yoksa yapay zeka mı?</p>
@@ -724,7 +733,8 @@
 
         function eslestirmeCiz() {
             const e = eslesmeler[Math.floor(Math.random() * eslesmeler.length)];
-            document.getElementById('ortaSahne').innerHTML = `
+            const sahne = document.getElementById('ortaSahne');
+            sahne.innerHTML = `
                 <div class="w-full max-w-xl bg-[#0e193b] border border-blue-800/50 rounded-3xl p-8 text-center shadow-2xl animate-fade my-auto">
                     <h2 class="text-2xl font-bold text-amber-300 mb-2">⚔️ Eser - Yazar Eşleştirme Oyunu</h2>
                     <p class="text-xs text-slate-400 mb-6">Aşağıdaki ölümsüz eserin şairini seç!</p>
@@ -750,24 +760,30 @@
 
         function carkCevir() {
             const g = gorevler[Math.floor(Math.random() * gorevler.length)];
-            document.getElementById('carkSonuc').innerText = "🎉 Görevin: " + g;
+            const sonucEl = document.getElementById('carkSonuc');
+            if(sonucEl) sonucEl.innerText = "🎉 Görevin: " + g;
         }
 
         function dilekEkle() {
-            const ad = document.getElementById('dilekAd').value.trim();
-            const msj = document.getElementById('dilekMesaj').value.trim();
+            const adInput = document.getElementById('dilekAd');
+            const msjInput = document.getElementById('dilekMesaj');
+            const ad = adInput ? adInput.value.trim() : '';
+            const msj = msjInput ? msjInput.value.trim() : '';
             if(!ad || !msj) return alert("Lütfen adınızı ve mesajınızı yazın!");
             const liste = document.getElementById('dilekListesi');
-            liste.innerHTML = `
-                <div class="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-2xl animate-fade">
-                    <span class="text-xs font-bold text-emerald-300 block mb-1">${ad}</span>
-                    <p class="text-xs text-slate-200 italic">"${msj}"</p>
-                </div>
-            ` + liste.innerHTML;
-            document.getElementById('dilekAd').value = '';
-            document.getElementById('dilekMesaj').value = '';
+            if(liste) {
+                liste.innerHTML = `
+                    <div class="bg-emerald-500/10 border border-emerald-500/30 p-4 rounded-2xl animate-fade">
+                        <span class="text-xs font-bold text-emerald-300 block mb-1">${ad}</span>
+                        <p class="text-xs text-slate-200 italic">"${msj}"</p>
+                    </div>
+                ` + liste.innerHTML;
+            }
+            if(adInput) adInput.value = '';
+            if(msjInput) msjInput.value = '';
         }
 
+        // Başlangıç tetikleyicisi
         siirListesiniCiz(siirler);
         siirGoster(0);
     </script>
